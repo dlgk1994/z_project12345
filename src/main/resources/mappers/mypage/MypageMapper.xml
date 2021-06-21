@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.care.root.mypage.mybatis.MypageMapper">
+	<resultMap type="com.care.root.mypage.dto.CartDTO" id="cart">
+		<id property="write_no" column="write_no"/>
+		<result property="product_num" column="product_num"/>
+		<result property="product_name" column="product_name"/>
+		<result property="payment_total" column="payment_total"/>
+		<result property="cart_state" column="cart_state"/>
+		<result property="cart_photo" column="cart_photo"/>
+		<result property="member_id" column="member_id"/>
+	</resultMap>
+	
+	<!-- 장바구니 -->
+	<select id="myCart" resultMap="cart">
+		select B.* from(select rownum rn, A.* from
+		(select * from cart order by write_no desc)A)B where rn between #{s} and #{e}
+	</select>
+	<!-- 페이징 -->
+	<select id="mycartCount" resultType="Integer">
+		select count(*) from cart
+	</select>
+	<!-- 장바구니 내역 삭제 -->
+	<delete id="deleteCart">
+		delete from cartd where write_no=#{write_no}
+	</delete>
+</mapper>
