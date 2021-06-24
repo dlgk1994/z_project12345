@@ -11,16 +11,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 
 //상품등록 서비스인터페이스
 public interface productService {
-	public void adminProductList(Model model);
+	public void adminProductList(Model model,int num);
 	public String productSave(MultipartHttpServletRequest mul,HttpServletRequest request);
 	public void adminProductView(String productNum,Model model);
-	public String productModify(MultipartHttpServletRequest mul, HttpServletRequest request);
+	//public String productModify(MultipartHttpServletRequest mul, HttpServletRequest request);
 	//public String productDelete(String productNum, String productThumbnail,HttpServletRequest request);
 	public productImageDTO insertImage(MultipartFile uploadFile, String savePath);
 	public int insertProduct(Map<String, Object> map, List<MultipartFile> images, String savePath);
+	public void selectImg(String productNum,Model model);
+	public int updateProduct(productDTO updateProductDTO, MultipartFile images, String savePath);
+	public void delete(List<String> num);
+	public List<String> selectDBFileList();
+	
+	
 	
 }

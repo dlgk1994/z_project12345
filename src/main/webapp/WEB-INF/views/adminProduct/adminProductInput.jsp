@@ -35,11 +35,11 @@
    .thumbnail{width:150px; height:200px; margin: -300px 0 0 900px; }
    
    
-   .summernote1{width: 1000px;  margin: 60px 0 0 100px;}
+   .summernote1{width: 1000px;   margin: 60px 0 0 100px;}
    
    .file{margin: 0 0 0 100px;}
    
-   .button{margin: 10px 0 0 900px;}
+   .button{margin: 10px 0 0 900px; height: 900px;}
    #ok{font-size: 16px;}
    #cancel{font-size: 16px;}
 </style>
@@ -221,7 +221,9 @@
    </form>
 </div>
    </div>
+<div style="margin-bottom: 10px;">
 <jsp:include page="../footer.jsp" />
+</div>
    <!-- Bootstrap core JS-->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 

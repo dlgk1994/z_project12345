@@ -35,15 +35,16 @@
 	.thumbnail{width:150px; height:200px; margin: -300px 0 0 900px; }
 	
 	
-	.summernote1{width: 1000px; height:500px; margin: 60px 0 0 100px; }
+	.summernote1{width: 1000px;  margin: 60px 0 0 100px; }
 	
 	.file{margin: 0 0 0 100px;}
 	
-	.button{margin: 10px 0 0 900px;}
+	.button{margin: 10px 0 0 900px;height: 900px;}
 	#ok{font-size: 16px;}
 	#cancel{font-size: 16px;}
 </style>
-
+<!-- summernote 사용 시 필요한 js 파일 추가 -->
+<script src="${contextPath}/resources/summernote/js/mySummernote.js"></script>
 <script type="text/javascript">
 	//summernoet
 	$(document).ready(function() { /* 이거 없으면 summernote 없어짐 */
@@ -73,11 +74,62 @@
 		}
 			
 	}
+	// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+	   $(function(){
+	      $("#fileArea").hide(); // #fileArea 요소를 숨김.      
+	      
+	      $(".boardImg").on("click", function(){ // 이미지 영역이 클릭 되었을 때
+	         
+	         // 클릭한 이미지 영역 인덱스 얻어오기
+	         var index = $(".boardImg").index(this);
+	               // -> 클릭된 요소가 .boardImg 중 몇번째 인덱스인지 반환
+	               
+	         //console.log(index);
+	         
+	         // 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+	         $("#img" + index).click();
+	      });
+	      
+	   });
+
+	   
+	  
+	  // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+	  function LoadImg(value, num) {
+	     // value.files : 파일이 업로드되어 있으면 true
+	     // value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+	     
+	      if(value.files && value.files[0]){ // 해당 요소에 업로드된 파일이 있을 경우
+	         
+	         var reader = new FileReader();
+	      // 자바스크립트 FileReader
+	     // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
+	     // 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 
+	     // 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+	     
+	     reader.readAsDataURL(value.files[0]);
+	    // FileReader.readAsDataURL()
+	     // 지정된의 내용을 읽기 시작합니다. 
+	     // Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.   
+	     
+	     reader.onload = function(e){
+	       // FileReader.onload
+	            // load 이벤트의 핸들러. 
+	            // 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.   
+	        
+	            // 읽어들인 내용(이미지 파일)을 화면에 출력
+	            
+	            $(".boardImg").eq(num).children("img").attr("src", e.target.result);
+	            // e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
+	            
+	     }
+	      }
+	   }
 	function productSave() {
 		location.href='productModify'
 	}
-	var no = ${productView.productNum}; 
-	console.log(no);
+//	var no = ${productView.productNum}; 
+//	console.log(no);
 	
 	
 </script>
@@ -89,7 +141,7 @@
 	
 <div class="wrap">
 	<h1 class="subTitle" >상품</h1>
-	<form action="${contextPath }/adminProduct/adminProductModify?productNum=${productView.productNum}" method="post" enctype="multipart/form-data">
+	<form action="${contextPath }/adminProduct/adminProductModify" method="post" enctype="multipart/form-data">
 		<div class="iTitle">
 			글제목<br>
 			<input type="text" name=productTitle class="inpuptTile"  value="${productView.productTitle }">
@@ -137,14 +189,24 @@
 			<input type="file" name="productThumbnail" onchange="readURL(this);">
 		</div> --%>
 		
-		<%-- <div class="thumbnail">
-            <div class="form-inline mb-2">
-               <label class="input-group-addon mr-3 insert-label">썸네일</label>
-               <div class="boardImg" id="titleImgArea">
-                  <img id="titleImg" name="productThumbnail" width="200" height="200" src="${contextPath}/adminProduct/download?productThumbnail=${productView.productThumbnail}">
-               </div>
-            </div>
-         </div> --%>
+	
+		 
+	    	<c:set var="src" value="${contextPath}${productImgView.filePath}/${productImgView.fileName}"/>
+				<div class="thumbnail">
+		            <div class="form-inline mb-2">
+		               <label class="input-group-addon mr-3 insert-label">썸네일</label>
+		               <div class="boardImg" id="titleImgArea">
+		                  <img id="titleImg" width="200" height="200" src="${src}">
+		               </div>
+		            </div>
+		         </div>
+        
+        
+         <!-- 파일 업로드 하는 부분 -->
+         <div id="fileArea">
+            <input type="file" id="img0" name="images" onchange="LoadImg(this,0)"> 
+         </div>
+         
 		
 		<div class="summernote1">
 			<textarea rows="5" cols="5" id="summernote" name="productContent" placeholder="내용작성" >${productView.productContent }</textarea>
@@ -153,13 +215,15 @@
 		
 		<div class="button">
 			<input type="submit" value="수정" class="btn btn-outline-primary" id="ok">
-			<input type="button" class="btn btn-outline-primary" id="cancel" onclick="location.href='${contextPath}/adminProduct/delete?${productView.productNum}'" value="삭제">
-			<button type="button" class="btn btn-outline-primary" id="cancel" onclick="history.back()">취소</button>
-		</div> 
+			<button type="button" class="btn btn-outline-primary" id="cancel" onclick="removeCheck()">취소</button>
+		</div>
+		
 	</form>
 </div>
 	</div>
+<div>
 <jsp:include page="../footer.jsp" />
+</div>
 	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 

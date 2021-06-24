@@ -1,6 +1,7 @@
 package com.care.root.admin.product.dto;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -59,9 +60,9 @@ public class productDTO {
 	public String getProductDate() {
 		return productDate;
 	}
-	public void setProductDate(String productDate) {
-		this.productDate = productDate;
-	}
+//	public void setProductDate(String productDate) {
+//		this.productDate = productDate;
+//	}
 	public void setProductDate(Timestamp productDate) {
 		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		this.productDate = format.format(productDate);
