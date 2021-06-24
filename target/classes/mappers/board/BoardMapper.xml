@@ -44,8 +44,8 @@
 	</select>
 	<!-- Q&A 글 저장 -->
 	<insert id="qnaSave">
-		insert into board_enquiry(enquiry_no,member_id,enquiry_subject,enquiry_content,enquiry_writedate,enquiry_state) 
-		values(enquiry_seq.nextval,#{member_id},#{enquiry_subject},#{enquiry_content},#{enquiry_writedate},#{enquiry_state})
+		insert into board_enquiry(enquiry_no,member_id,enquiry_subject,enquiry_content,enquiry_state) 
+		values(enquiry_seq.nextval,#{member_id},#{enquiry_subject},#{enquiry_content},#{enquiry_state})
 	</insert>
 	<!-- 조회수 증가 -->
 	<update id="upHit">

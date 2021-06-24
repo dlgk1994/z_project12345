@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,25 +25,7 @@ import com.care.root.mypage.service.MypageFileService;
 public class MypageFileController {
 	@Autowired MypageFileService fs;
 	
-	@RequestMapping("reviewSave")
-	public void reviewSave(MultipartHttpServletRequest mul) {
-		String review_content = mul.getParameter("review_content");
-		
-		MultipartFile file1 = mul.getFile("review_file1");
-		MultipartFile file2 = mul.getFile("review_file2");
-		MultipartFile file3 = mul.getFile("review_file3");
-		String originalName = file1.getOriginalFilename();
-		System.out.println("내용 : " + review_content);
-		System.out.println("원본파일이름 : " + originalName);
-		
-		//fs.reviewSave(mul);
-		
-	}
-	@PostMapping(value="star_rating", produces="application/json; charset=utf-8")
-	public @ResponseBody void star_rating(@RequestParam Map<String, Object> param) {
-		System.out.println(param.get("star_rating"));
-		//fs.reviewSave(param);
-	}
+	
 	/*
 	@GetMapping("download")
 	public void download(@RequestParam("file") String fileName,

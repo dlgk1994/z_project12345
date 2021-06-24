@@ -52,6 +52,7 @@
 							<td>반납일</td>
 							<td>
 								<button type="button" onclick="location.href='${ contextPath }/mypage/reviewForm'">리뷰작성</button>
+								<!-- ?payment_title=${ dto.payment_title }&cart_photo=${ dto.cart_photo } -->
 								<button type="button" onclick="#">반납</button>
 							</td>
 						</tr>

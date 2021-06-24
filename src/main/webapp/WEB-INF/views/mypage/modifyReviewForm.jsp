@@ -57,49 +57,37 @@
 			<c:import url="../aside.jsp"/>				
 		</aside>
 		<div id="container_box">
-		<h3>내 리뷰 작성</h3>
-			<form action="${ contextPath }/mypage/reviewSave" method="post" enctype="multipart/form-data">
+		<h3>내 리뷰 수정</h3>
+			<form action="${ contextPath }/mypage/modifyReviewSave?review_no=${ selectReview.review_no }" method="post" enctype="multipart/form-data">
 				<b>상품명</b><br>
 				<img src="" style="width: 50px; height: 50px">
 				<a href="#">상품명</a><hr>
 				<b>작성자</b><br>
-				<input type="text" name="review_id" value="" readonly><hr>
+				<input type="text" name="review_id" value="${ selectReview.review_id }" readonly><hr>
 				<b>내용</b><br>
-				<textarea rows="10" cols="50" name="review_content"></textarea><hr>
-				<b>별점</b>&nbsp;
-				<div class="rating">
-					<p class="star_rating">
-					    <a href="#" value="1" class="on">★</a>
-					    <a href="#" value="2" class="on">★</a>
-					    <a href="#" value="3" class="on">★</a>
-					    <a href="#" value="4">★</a>
-					    <a href="#" value="5">★</a>
-					</p>
-					<input type="hidden" name="review_score">
-				</div><hr>
-				<script type="text/javascript">
-					$( document ).ready(function() {
-						$( ".star_rating a" ).click(function() {
-						     $(this).parent().children("a").removeClass("on");
-						     $(this).addClass("on").prevAll("a").addClass("on");
-						     console.log($(this).attr("value")); //.attr()은 요소(element)의 속성(attribute)의 값을 가져오거나 속성을 추가
-						    
-						     var review_score = $(this).attr("value");
-						     var form = { review_score:review_score };
-						     
-						     $.ajax({
-									url : "star_rating/"+$(this).attr("value"),
-									type : "POST", datadataType : "json",
-									success : function(result) {
-										console.log("성공");
-										console.log(result);
-										$('input[name=review_score]').val(result);
-									}, error : function() { alert('문제 발생') }
-								});
-						     return false;
-						});
-					});
-				</script>	
+				<textarea rows="10" cols="50" name="review_content">${ selectReview.review_content }</textarea><hr>
+				<b>사진</b><br>
+				<c:if test="${ selectReview.review_file1 == 'nan' }">
+					<img id="preview" src="#" width="150px" height="150px" alt="선택된 이미지가 없습니다">&nbsp;
+				</c:if>
+				<c:if test="${ selectReview.review_file1 != 'nan' }">
+					<img id="preview" src="${ contextPath }/mypage/download?file=${ selectReview.review_file1 }" width="150px" height="150px">&nbsp;
+				</c:if>
+				<c:if test="${ selectReview.review_file2 == 'nan' }">
+					<img id="preview" src="#" width="150px" height="150px" alt="선택된 이미지가 없습니다">&nbsp;
+				</c:if>
+				<c:if test="${ selectReview.review_file2 != 'nan' }">
+					<img id="preview" src="${ contextPath }/mypage/download?file=${ selectReview.review_file2 }" width="150px" height="150px">&nbsp;
+				</c:if>
+				<c:if test="${ selectReview.review_file3 == 'nan' }">
+					<img id="preview" src="#" width="150px" height="150px" alt="선택된 이미지가 없습니다"><br>
+				</c:if>
+				<c:if test="${ selectReview.review_file3 != 'nan' }">
+					<img id="preview" src="${ contextPath }/mypage/download?file=${ selectReview.review_file3 }" width="150px" height="150px"><br>
+				</c:if>
+				<input type="hidden" name="org_file_name1" value="${ selectReview.review_file1 }">
+				<input type="hidden" name="org_file_name2" value="${ selectReview.review_file2 }">
+				<input type="hidden" name="org_file_name3" value="${ selectReview.review_file3 }">
 				<input type="file" name="review_file1" onchange="readURL(this)">
 				<input type="file" name="review_file2" onchange="readURL(this)">
 				<input type="file" name="review_file3" onchange="readURL(this)"><hr>

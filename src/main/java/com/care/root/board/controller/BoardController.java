@@ -50,9 +50,8 @@ public class BoardController {
 	}
 	//Q&A 제목 클릭 시 상세보기
 	@RequestMapping("selectQna")
-	public String selectQna(Model model, @RequestParam int enquiry_no, RedirectAttributes ra) {
+	public String selectQna(Model model, @RequestParam int enquiry_no) {
 		bs.selectQna(model, enquiry_no);
-		ra.addFlashAttribute("model", model);
 		return "board/selectQna";
 	}
 	//Q&A 검색

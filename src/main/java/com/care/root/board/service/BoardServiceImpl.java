@@ -58,11 +58,6 @@ public class BoardServiceImpl implements BoardService {
 		dto.setEnquiry_content(mul.getParameter("enquiry_content"));
 		dto.setEnquiry_state("답변중");
 
-		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		
-		dto.setEnquiry_writedate(s.format(calendar.getTime()));
-
 		mapper.qnaSave(dto);
 	}
 	//조회수 증가
