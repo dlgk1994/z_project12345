@@ -33,8 +33,42 @@ public class productServiceImpl implements productService{
 	@Autowired productMapper mapper;
 	
 	@Override
-	public void adminProductList(Model model) {
-		model.addAttribute("adminProductList",mapper.adminProductList());
+	public void adminProductList(Model model, int num) {
+		int pageLatter = 5;
+		int allCount = mapper.selectProductCount();
+		int pageNumCnt = 5;
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNumCnt) * pageNumCnt);
+		int startPageNum = endPageNum - (pageNumCnt - 1);
+		
+		int repeat = allCount / pageLatter;
+		if(allCount % pageLatter != 0) {
+			repeat += 1;
+		}
+		int end = num * pageLatter;
+		int start = end + 1 - pageLatter;
+		int prevPage = num-1;
+		int nextPage = num+1;
+		
+		int endPageNum_tmp = (int)(Math.ceil((double)allCount / (double)pageNumCnt));
+		 
+		if(endPageNum > endPageNum_tmp) {
+		 endPageNum = endPageNum_tmp;
+		}
+		boolean prev = start == 1 ? false : true;
+		boolean next = endPageNum * pageNumCnt >= allCount ? false : true;
+		
+		
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		model.addAttribute("repeat", repeat);
+		model.addAttribute("prevPage",prevPage);
+		model.addAttribute("nextPage",nextPage);
+		model.addAttribute("prev",prev);
+		model.addAttribute("next",next);
+		model.addAttribute("select",num);
+		
+		model.addAttribute("adminProductList",mapper.adminProductList(start,end));
 		
 	}
 
@@ -71,8 +105,14 @@ public class productServiceImpl implements productService{
 		model.addAttribute("productView",mapper.adminProductView(productNum));
 		
 	}
-
+	
 	@Override
+	public void selectImg(String productNum,Model model) {
+		model.addAttribute("productImgView",mapper.attachmentList(productNum));
+		//System.out.println("서비스 : "+productNum);
+	}
+
+	/*@Override
 	public String productModify(MultipartHttpServletRequest mul, HttpServletRequest request) {
 		productDTO dto = new productDTO();
 		dto.setProductTitle(mul.getParameter("productTitle"));
@@ -106,8 +146,9 @@ public class productServiceImpl implements productService{
 		String message = pfs.getMessage(mDTO);
 		return message;
 		
-	}
-
+	} 
+	
+*/
 	
 
 //	@Override
@@ -294,7 +335,7 @@ public class productServiceImpl implements productService{
 										e.printStackTrace();
 										
 										// transferTo() 는 IOException을 발생 시킴 (CheckedException)
-										// -> 어쩔 수 없이 try-catch 작성
+									// -> 어쩔 수 없이 try-catch 작성
 										// --> 예외가 처리되버려서 @Transctional이 정상 동작하지 못함
 										// --> 꼭 예외처리를 하지 않아도 되는 UncheckedException을 강제 발생하여
 										//     @Transactional이 예외가 발생했음을 감지하게 함
@@ -316,13 +357,211 @@ public class productServiceImpl implements productService{
 			return result;
 		}
 
-	
+		
+		
+		@Override
+		public int updateProduct(productDTO updateProductDTO, MultipartFile images, String savePath) {
+			
+			
+			int result = mapper.productModify(updateProductDTO);
+	       
+			System.out.println(result + "수정된거냐 안된가냐");
+			
+			//System.out.println(updateShopBoard.getItemNo()+"shopBoardUpdate");
+			
+			String filePath = "/resources/summernoteImg";
+			if(result > 0) {
+				
+				productImageDTO oldFile = mapper.attachmentList(updateProductDTO.getProductNum());
+				productImageDTO uploadImages = new productImageDTO();
+				productImageDTO removeFile = new productImageDTO();
+				
+				
+				if(!images.getOriginalFilename().equals("")) {
 
+					String fileName = rename(images.getOriginalFilename());
+					
+					productImageDTO at = new productImageDTO(filePath, fileName, 0, updateProductDTO.getProductNum());
+					//at.setFileNo(oldFile.getFileNo());filePath fileName
+					
+					System.out.println("파일수정정보at" + at);
+				    result = mapper.updateProductImg(at);
+				    System.out.println("파일수정행: " +result);
+				
+				if(result<=0) {
+					System.out.println("파일 정보 수정 실패");
+				}
 
+			
+				if(result > 0) {
+					try {
+						images
+						.transferTo(new File(savePath+"/"+at.getFileName()));
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				
+				}
+				
+				File tmp = new File(savePath + "/" + oldFile.getFileName());
+				tmp.delete();
+			
+				}
+			
+			   }
+			
+			
+			// 1) summernote로 작성된 게시글  부분 수정
+			// 2) 썸네일 이미지 수정
+			// 3) summernote로 작성된 게시글 에있는 이미지 정보 수정
+			// -> 게시글 내부 <img> 태그의 src 속성을 얻어와 파일명을 얻어옴.
+			// -> 수정 전 게시글의 이미지와  수정 후  게시글 이미지  파일명을 비교
+			// --> 새롭게 추가된 이미지, 기존 이미지에서 삭제된 것도 존재
+			// --> Attachment 테이블에 반영
+			
+			
+			List<productImageDTO> oldFiles = mapper.selectProductSummernoteImg(updateProductDTO.getProductNum());
+
+			Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>"); //img 태그 src 추출 정규표현식
+			
+			// 게시글에 작성된 <img> 태그의 src속성을 이용해 
+			Matcher matcher = pattern.matcher(updateProductDTO.getProductContent());
+			
+			// 정규식을 통해 게시글에 작성된 이미지 파일명만 얻어와 모아둘 List 선언
+			List<String> fileNameList = new ArrayList<String>();
+			
+			String src = null; //  matcher에 저장된 src를 꺼내서 임시 저장할 변수
+			String fileName = null; //src에서 파일명을 추출해서 임시 저장할 변수
+			
+			while(matcher.find()) {
+				src = matcher.group(1); // /ehshe/shop/resources/clothes/abc.jpg
+				fileName =src.substring(src.lastIndexOf("/")+1); // abc.jpg
+				fileNameList.add(fileName);
+			}
+			
+			// DB에 새로 추가할 이미지파일 정보를 모아둘 List 생성
+			List<productImageDTO> newShopAttachmentList = new ArrayList<productImageDTO>();
+			
+			// DB에서 삭제할 이미지 파일 번호를 모아둘 LIST 생성
+			List<Integer> deleteFileNoList = new ArrayList<Integer>();
+			
+			
+			
+			// 수정된 게시글 파일명 목록(fileNameList)와
+			// 수정 전 파일 정보 목록(oldFiles)를 비교해서
+			// 수정된 게시글 파일명 하나를 기준으로 하여 수정 전 파일명과 순차적 비교를 진행
+			// --> 수정된 게시글 파일명과 일치하는 수정 전 파일명이 없다면
+			//    == 새로 삽입된 이미지임을 의미함.
+			
+			for(String fName : fileNameList) {
+				
+				boolean flag = true;
+				
+				for(productImageDTO oldAt : oldFiles) {
+					
+					// if(oldAt.getFileLevel() == 0) continue;
+					
+					if(fileName.equals(oldAt.getFileName())) { // 수정 후 / 수정 전 같은 파일이 있다.== 수정되지 않았다.
+						flag = false;
+						break;
+					}
+				}
+				
+				// flag == true ==  수정 후 게시글 파일명과 수정전 파일명이 일치하는게 없을 경우
+				// == 새로운 이미지 --> newShopAttachmentList 추가
+				if(flag) {
+					productImageDTO at = new productImageDTO(fName,filePath,1,updateProductDTO.getProductNum());
+					newShopAttachmentList.add(at);
+				}
+				
+			}
+			
+			
+			// 수정전 게시글 파일명 목록(oldFlies)와
+			// 수정된 파일 정보 목록(fileNameList)를 비교해서
+			// 수정전 게시글 파일명 하나를 기준으로 하여 수정 후 파일명과 순차적 비교를 진행
+			// --> 수정 전 게시글 파일명과 일치하는 수정 후 파일명이 없다면
+			//    == 기존 수정 전 이미지가 삭제함을 의미 
+			for(productImageDTO oldAt : oldFiles) {
+				
+			//	if(oldAt.getFileLevel() == 0) continue;
+				
+				boolean flag = true;
+				
+				for(String fName : fileNameList) {
+					if(oldAt.getFileName().equals(fName)) {
+						flag =  false;
+						break;
+					}
+				}
+				
+				// flag == true ==  수정 전 게시글 파일명과 수정 후  파일명이 일치하는게 없을 경우
+				// == 삭제된 이미지 --> deleteFileNoList 추가
+				if(flag){
+					deleteFileNoList.add(oldAt.getFileNo());
+					
+				}
+				
+			}
+		  //newShopAttachmentList / deleteFileNoList 완성됨
+			
+			if(!newShopAttachmentList.isEmpty()) { //새로 삽입된 이미지가 있다면
+				result = mapper.insertProductImg(newShopAttachmentList);
+				
+				if(result != newShopAttachmentList.size()) { // 삽입된 결과행의 수와 삽입을 수행한 리스트 수가 맞지 않을 경우 == 실패
+					System.out.println("파일 수정 실패(파일 정보 삽입 중 오류 발생)");
+				}
+			}
+			
+			if(!deleteFileNoList.isEmpty()){ // 삭제할 이미지가 있다면
+				result = mapper.deleteProductImgList(deleteFileNoList);
+			
+			
+				if(result != deleteFileNoList.size()) {
+					System.out.println("파일 수정 실패(파일 정보 삭제 중 오류 발생)");
+					
+				}
+			
+			
+		}
+
+			
+			
+	   return result;
+				
+   }
+
+		
+		
+//		@Override
+//		public void delete(String[] ajaxMsg) {
+//			System.out.println("서비스ajaxMsg : "+ajaxMsg);
+//			mapper.delete(ajaxMsg);
+//			
+//		}
+
+		@Override
+		public void delete(List<String> num) {
+			
+			System.out.println("서비스ajaxMsg : "+ num);
+			
+		    mapper.deleteProductImgList2(num);
+			
+			mapper.delete(num);
+			
+		}
+
+		@Override
+		public List<String> selectDBFileList() {
+			
+			return mapper.selectDBfileList();
+		}
 
 	
  
 }
+
 
 
 

@@ -3,6 +3,7 @@ package com.care.root.admin.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +41,10 @@ public class adminController {
 	
 	//관리자 상품 리스트
 	@GetMapping("adminProduct/adminProductList")
-	public String adminProductList(Model model) {
-		ps.adminProductList(model);
+	public String adminProductList(Model model,
+			@RequestParam(value="num", required = false,defaultValue = "1")int num){
+		ps.adminProductList(model, num);
+		
 		return "adminProduct/adminProductList";
 	}
 	
@@ -146,6 +149,13 @@ public class adminController {
 	@RequestMapping("adminProduct/adminProductView")
 	public String adminProductView(@RequestParam String productNum,Model model) {
 		ps.adminProductView(productNum,model);
+		ps.selectImg(productNum,model);//수정 페이지에서 썸네일 불러오기 
+		//System.out.println("컨트롤 : "+productNum);
+		
+		    
+		
+			
+			
 		return "adminProduct/adminProductView";
 	}
 	@GetMapping("adminProduct/download")
@@ -166,7 +176,7 @@ public class adminController {
 	
 	
 	//상품수정(업데이트)
-	@PostMapping("adminProduct/adminProductModify")
+/*	@PostMapping("adminProduct/adminProductModify")
 	public void adminProductModify(MultipartHttpServletRequest mul,
 									HttpServletResponse response, // 사용자에게 메시지 전달(성공,실패)
 									HttpServletRequest request) throws Exception {
@@ -174,7 +184,61 @@ public class adminController {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html; charset=utf-8");
 		out.print(message);
+	} */
+	
+	@ResponseBody
+	@RequestMapping("adminProduct/delete")
+	public void ajaxDelete(@RequestParam (value="valueArr" ,required=false) List<String> deleteProductNum) {
+	
+	   ps.delete(deleteProductNum);
+		
 	}
+	
+	
+	// 게시글 수정 Controller
+   @RequestMapping("adminProduct/adminProductModify")	 
+    public String ShopUpdateAction(
+   		 						@ModelAttribute productDTO updateProductDTO,
+   		 						HttpServletRequest request,
+   		 						@RequestParam(value="images" ,required=false) MultipartFile images
+   		 						){
+   	 
+     
+  updateProductDTO.setProductNum(updateProductDTO.getProductNum());
+   
+   
+   System.out.println("1 " + updateProductDTO.getProductNum());
+   
+   System.out.println(updateProductDTO);
+
+   String savePath = null;	 
+   
+		savePath = request.getSession().getServletContext().getRealPath("resources/summernoteImg");
+   	
+	
+   
+	   int result = ps.updateProduct(updateProductDTO,images,savePath);
+	
+	
+	    String url =null;
+	
+		// 게시글 삽입 결과에 따른 View 연결 처리
+		if(result > 0) {
+			url = "redirect:adminProductList";
+			
+		}else{
+			url = "redirect:adminProductView";
+		}
+	
+	   return url;
+  } 
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -237,6 +301,7 @@ public class adminController {
 		// 서버에 파일(이미지)를 저장할 폴더 경로 얻어오기
 		String savePath
 		 = request.getSession().getServletContext().getRealPath("resources/summernoteImg");
+		System.out.println("savePath"+savePath);
 		
 		productImageDTO at =ps.insertImage(uploadFile,savePath);
 		

@@ -18,6 +18,16 @@ public class productImageDTO {
 		this.parentBoardNo = parentBoardNo;
 	}
 	
+	
+	public productImageDTO(int fileNo, String filePath, String fileName, int fileLevel, String parentBoardNo) {
+		super();
+		this.fileNo = fileNo;
+		this.filePath = filePath;
+		this.fileName = fileName;
+		this.fileLevel = fileLevel;
+		this.parentBoardNo = parentBoardNo;
+	}
+
 	public int getFileNo() {
 		return fileNo;
 	}

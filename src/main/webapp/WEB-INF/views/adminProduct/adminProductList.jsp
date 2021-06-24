@@ -18,6 +18,7 @@
 	.container{margin-top: 20px;}
 	#b3{margin-top: 10px; margin-left: 10px;}
 	.t{width: 1500px; height: 1000px;  margin: auto;}
+	#a{width: 60px; text-align: center;}
 </style>
 
 </head>
@@ -51,27 +52,62 @@
 	    <c:forEach var="dto" items="${adminProductList }">
 	      <tr>
 	      	<td><input type="checkbox" class="choice" name="choice" id="choice" value="${dto.productNum}"></td>
-	        <td>${dto.productNum }</td>
-	        <td><a href="${contextPath }/adminProduct/adminProductView?productNum=${dto.productNum}">${dto.productTitle }</a></td>
+	        <td width="100px;">${dto.productNum }</td>
+	        <td width="400px;"><a href="${contextPath }/adminProduct/adminProductView?productNum=${dto.productNum}">${dto.productTitle }</a></td>
 	        <td>${dto.productPee }</td>
 	        <td>${dto.productDate }</td>
-	      </tr>
+	        <%-- <td>
+	        <c:if test="${dto.productNum == productImgView.parent_board_no }">
+	        	<c:set var="src" value="${contextPath}${productImgView.filePath}/${productImgView.fileName}"/>
+				<div class="thumbnail">
+		            <div class="form-inline mb-2">
+		               <label class="input-group-addon mr-3 insert-label">썸네일</label>
+		               <div class="boardImg" id="titleImgArea">
+		                  <img id="titleImg" width="100" height="100" src="${src}">
+		               </div>
+		            </div>
+		         </div>
+		    </c:if>
+	        </td> --%>
+	      </tr> 
 	     </c:forEach>
-	    </tbody>
+	    
+	    <tr>
+	    	<td colspan="4">
+	    	  <div style="display: flex;">
+	    		<a href="${contextPath }/adminProduct/adminProductList?num=1" id="a" class="page-link">처음</a>
+	    		<c:if test="${prev }">
+					<a href="${contextPath }/adminProduct/adminProductList?num=${prevPage}" id="a" class="page-link">이전</a>
+				</c:if>
+				<c:forEach var = "num" begin="${startPageNum }" end="${endPageNum }">	
+					<span>
+						<c:if test="${select != num }">
+							<a href="${contextPath }/adminProduct/adminProductList?num=${num}" id="a" class="page-link">${num }</a>				
+						</c:if>
+
+						<c:if test="${select == num }">
+							<a href="${contextPath }/adminProduct/adminProductList?num=${num}" id="a" class="page-link"><b>${num }</b></a>
+						</c:if>
+					</span>	
+				</c:forEach>
+				<c:if test="${next }">
+					<a href="${contextPath }/adminProduct/adminProductList?num=${nextPage}" id="a" class="page-link">다음</a>
+				</c:if>
+				<a href="${contextPath }/adminProduct/adminProductList?num=${repeat }" id="a" class="page-link">끝</a>
+				
+	    	  </div>
+	    	</td>
+	    	
+	    	<td>
+	    		<button type="button" class="btn btn-outline-primary"  onclick="input()">상품등록</button>
+				<input type="button" class="btn btn-outline-primary" id="b1" onclick="deleteValue();" value="선택삭제"/>
+			</td>
+	    </tr>
+	    </tbody>  	
 	  </table>
-	  	<div class="button">
-		  	<input type="button" class="btn btn-outline-primary" id="b1" onclick="" value="선택삭제"/>
-			<button type="button" class="btn btn-outline-primary" id="b2" onclick="">전체삭제</button>
-		</div>
 	  
-	</div>
-	<button type="button" class="btn btn-outline-primary" id="b3" onclick="input()">상품등록</button>
-	
-	
-	
-	
-	
-	
+	  
+</div>	
 </div>
 </div>
 <jsp:include page="../footer.jsp" />
@@ -101,23 +137,51 @@
 
     });
 
-/* //체크박스 하나 해제시 전체체크박스 해제
-$(document).on("click", "input[name=optionCheckBox]", function(){
-
-var checkbox =$("input[name=optionCheckBox]:checked");
-
-if($("input[name=optionCheckBox]").length==checkbox.length){ 
-  
-    $("#optionCheckAll").prop("checked",true); 
-}else{ 
-   $('#optionCheckAll').prop("checked",false); 
-} 
-
-});	 */
+	//체크박스 하나 해제시 전체체크박스 해제
+	$(document).on("click", "input[name=choice]", function(){
 	
+		var checkbox =$("input[name=choice]:checked");
+		
+		if($("input[name=choice]").length==checkbox.length){ 
+		  
+		    $("allCheck").prop("checked",true); 
+		}else{ 
+		   $('#allCheck').prop("checked",false); 
+		} 
 	
+	});
 	
-	
+	function deleteValue() {
+		var url = "adminProduct/delete";
+		var valueArr = new Array();
+		var list = $("input[name=choice]");
+		for (var i = 0; i<list.length; i++){
+			if(list[i].checked){
+				valueArr.push(list[i].value);
+			}
+		}
+		if(valueArr.length ==0){
+			alert("선택된 글이 없습니다")
+		}
+		else{
+			var chk = confirm("정말 삭제 하시겠습니까?");
+			$.ajax({
+				url : "delete",
+				type : 'POST',
+				traditional : true,
+				data : {
+					valueArr : valueArr
+				},
+				success : function(jdata) {	
+					console.log(jdata);
+				
+					location.href="adminProductList";
+					 
+				}
+			})
+		}
+		
+	}
 
 	
 	
