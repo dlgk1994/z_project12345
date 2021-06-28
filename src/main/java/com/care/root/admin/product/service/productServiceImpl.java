@@ -22,9 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.care.root.admin.product.dto.MessageDTO;
+import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 import com.care.root.adminProduct.mtbatis.productMapper;
+import com.care.root.board.dto.NoticeDTO;
+import com.care.root.board.service.BoardService;
+import com.care.root.board.service.BoardServiceImpl;
 
 
 //상품등록서비스임플
@@ -558,6 +562,101 @@ public class productServiceImpl implements productService{
 			return mapper.selectDBfileList();
 		}
 
+		@Override
+		public void noticeSave(NoticeDTO dto, HttpServletRequest request) {
+			mapper.noticeWriteSave(dto);
+			System.out.println("서비스공지사항내용"+dto.getNotice_content());
+			System.out.println("서비스 공지사항 번호"+dto.getNotice_no());
+		}
+
+		@Override
+		public void contentView(int notice_no, Model model) {
+			model.addAttribute("noticeData", mapper.contentView(notice_no));
+			System.out.println("notice_no 서비스 : " + notice_no);
+		}
+
+		@Override
+		public void addReply(boardQnaRepDTO dto) {
+			//int result = mapper.addReply(dto);
+			mapper.addReply(dto);
+			//return result;
+		}
+
+		@Override
+		public String noticeModify(HttpServletRequest request,int notice_no) {
+			NoticeDTO dto = new NoticeDTO();
+			dto.setNotice_content(request.getParameter("notice_content"));
+			dto.setNotice_group(request.getParameter("notice_group"));
+			dto.setNotice_title(request.getParameter("notice_title"));
+			dto.setNotice_no(Integer.parseInt(request.getParameter("notice_no")));
+			System.out.println("서비스 공지사항 내용 : "+dto.getNotice_content());
+			System.out.println("서비스 공지사항 제목 : "+dto.getNotice_title());
+			System.out.println("서비스 공지사항 글번호 : "+notice_no);
+			productFileService pfs = new productFileServiceImpl();
+			
+			int result = mapper.noticeModify(dto);
+			MessageDTO mDTO = new MessageDTO();
+			mDTO.setResult(result); //result가 성공인지 실패인지를 가지고 있음
+			mDTO.setRequest(request);
+			mDTO.setSuccessMessage("성공적으로 수정되었습니다!");
+			mDTO.setSuccessURL("/board/notice");
+			mDTO.setFailMessage("수정 중 문제가 발생햇습니다");
+			mDTO.setFailURL("/boardInput/notice");
+			String message = pfs.getMessage(mDTO);
+			mapper.noticeModify(dto);
+			return message;
+		}
+
+		@Override
+		public String noticeDelete(int notice_no,HttpServletRequest request) {
+			
+			productFileService pfs = new productFileServiceImpl();
+			
+			int result = mapper.noticeDelete(notice_no);
+			
+			MessageDTO mDTO = new MessageDTO();
+			mDTO.setResult(result);
+			mDTO.setRequest(request);
+			mDTO.setSuccessMessage("성공적으로 삭제 되었습니다");
+			mDTO.setSuccessURL("/board/notice");
+			mDTO.setFailMessage("삭제 중 문제가 발생하였습니다");
+			mDTO.setFailURL("/boardInput/notice");	
+			return pfs.getMessage(mDTO);
+			
+		}
+
+		@Override
+		public void replyModify(int enquiryReplyNo, String eReplyContent) {
+			boardQnaRepDTO dto = new boardQnaRepDTO();
+			dto.setEnquiryReplyNo(enquiryReplyNo);
+			dto.seteReplyContent(eReplyContent);
+			System.out.println("서비스 답변 번호 : " + dto.getEnquiryReplyNo());
+			System.out.println("서비스 답변 수정내용 : " + dto.geteReplyContent());
+			mapper.replyModify(dto);
+			
+		}
+
+		
+
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+		
+
+		
+		
+
+		
 	
  
 }

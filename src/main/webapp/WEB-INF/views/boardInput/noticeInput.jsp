@@ -28,29 +28,34 @@
 	
 	<div class="wrap">
 		<h1>공지사항</h1>
+		<form action="${contextPath}/noticeSave">
 		<div style="margin-top: 20px;">
 			<select name="notice_group" class="category2">
 				<option value="0">공지분류
-				<option value="1">[일반공지]
-				<option value="2">[당첨발표]
+				<option value="[일반공지]">[일반공지]
+				<option value="[당첨발표]">[당첨발표]
 			</select>
 		</div>
 		<div>
 			<label style="margin: 40px 0 0 0px;">글 제목</label><br>
 			<input type="text" style=" width: 740px;" name="notice_title">
 		</div>
+		<div>
+			<label style="margin: 40px 0 0 0px;">글 번호</label><br>
+			<input type="text" style=" width: 740px;" name="notice_no">
+		</div>
 		
 		<div style="margin-top: 20px;">
 			<textarea rows="10" cols="100" name="notice_content"></textarea>
 		</div>
 		
-		<button type="button" class="btn btn-outline-primary" id="" onclick="#" style="margin: 10px 0 0 290px;">등 록</button>
+		<button type="submit" class="btn btn-outline-primary" id="" style="margin: 10px 0 0 290px;">등 록</button>
 		<button type="button" class="btn btn-outline-primary" id="" onclick="removeCheck()" style="margin: 10px 0 0 70px;" >취 소</button>
-		
+		</form>
 		
 	</div>
 </div>
-<jsp:include page="../footer.jsp" />
+
 
 <c:import url="../footer.jsp"/>
 	

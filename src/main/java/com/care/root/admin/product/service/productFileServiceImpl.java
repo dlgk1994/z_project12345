@@ -65,7 +65,6 @@ public class productFileServiceImpl implements productFileService{
 		
 	}
 
-	
 
 	
 	

@@ -32,10 +32,10 @@
 	.category1{margin: 20px 0 0 100px; border: 1px solid black;}
 	.category2{margin: 40px 0 0 100px; border: 1px solid black;}
 	
-	.thumbnail{width:150px; height:200px; margin: -300px 0 0 900px; }
+	.thumbnail{width:150px; height:200px; margin: -400px 0 0 900px;}
 	
 	
-	.summernote1{width: 1000px;  margin: 60px 0 0 100px; }
+	.summernote1{width: 1000px;   margin: 180px 0 0 100px;}
 	
 	.file{margin: 0 0 0 100px;}
 	
@@ -144,16 +144,16 @@
 	<form action="${contextPath }/adminProduct/adminProductModify" method="post" enctype="multipart/form-data">
 		<div class="iTitle">
 			글제목<br>
-			<input type="text" name=productTitle class="inpuptTile"  value="${productView.productTitle }">
+			<input type="text" name=productTitle class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;"  value="${productView.productTitle }">
 		</div>
 		
 		<div id="ProName" style="margin: 50px 0 0 100px;">
 			상품명<br>
-			<input type="text" name="productName" class="inpuptTile"  value="${productView.productName }">
+			<input type="text" name="productName" class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;"  value="${productView.productName }">
 		</div>
 		
 		<div>
-			<select name="productCategory" class="category1" value="${productView.productCategory }">
+			<select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;" value="${productView.productCategory }">
 				<option value="0">카테고리
 				<option value="휴대폰">휴대폰
 				<option value="스마트워치">스마트 워치
@@ -163,26 +163,26 @@
 		</div>
 		
 		<div>
-			<select name="productCompany" class="category2" value="${productView.productCompany }">
+			<select name="productCompany" style="border: 2px solid skyblue; border-radius: 5px;" class="category2" value="${productView.productCompany }">
 				<option value="0">제조사
 				<option value="삼성">삼성
 				<option value="LG">LG
 			</select>
 		</div>
 		
-		<div style="margin: 10px 0 0 100px;">
+		<div style="margin: 50px 0 0 900px;">
 			상품코드<br>
-			<input type="text" name="productNum" value="${productView.productNum}" readonly="readonly">
+			<input type="text" name="productNum" style="border: 2px solid skyblue; border-radius: 5px;" value="${productView.productNum}" readonly="readonly">
 		</div>
 		
-		<div style="margin: 30px 0 0 100px;">
+		<div style="margin: -90px 0 0 100px;">
 			상품가격<br>
-			<input type="text" name="productPee"  value="${productView.productPee }">원
+			<input type="text" name="productPee" style="border: 2px solid skyblue; width:200px; border-radius: 5px;"  value="${productView.productPee }">원
 		</div>
 		
 		<div style="margin: 10px 0 0 100px; height: 100px;">
 			상품수량<br>
-			<input type="text" name="productQuantity"  value="${productView.productQuantity }">개
+			<input type="text" name="productQuantity" style="border: 2px solid skyblue; width:200px; border-radius: 5px;"  value="${productView.productQuantity }">개
 		</div>
 		<%-- <div class="thumbnail" >
 			<img alt="선택된 이미지 없음" src="${contextPath}/adminProduct/download?productThumbnail=${productView.productThumbnail}" id="preview" style="width:150px; height:200px;">

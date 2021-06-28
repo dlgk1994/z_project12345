@@ -32,10 +32,10 @@
    .category1{margin: 20px 0 0 100px; border: 1px solid black;}
    .category2{margin: 40px 0 0 100px; border: 1px solid black;}
    
-   .thumbnail{width:150px; height:200px; margin: -300px 0 0 900px; }
+   .thumbnail{width:150px; height:200px; margin: -400px 0 0 900px; }
    
    
-   .summernote1{width: 1000px;   margin: 60px 0 0 100px;}
+   .summernote1{width: 1000px;   margin: 180px 0 0 100px;}
    
    .file{margin: 0 0 0 100px;}
    
@@ -144,16 +144,16 @@
    <form action="${contextPath }/adminProduct/productSave" method="post" enctype="multipart/form-data">
       <div class="iTitle">
          글제목<br>
-         <input type="text" name=productTitle class="inpuptTile">
+         <input type="text" name=productTitle class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
       <div id="ProName" style="margin: 50px 0 0 100px;">
          상품명<br>
-         <input type="text" name="productName" class="inpuptTile">
+         <input type="text" name="productName" class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
       <div>
-         <select name="productCategory" class="category1">
+         <select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;">
             <option value="0">카테고리
             <option value="휴대폰">휴대폰
             <option value="스마트워치">스마트 워치
@@ -163,26 +163,26 @@
       </div>
       
       <div>
-         <select name="productCompany" class="category2">
+         <select name="productCompany" class="category2" style="border: 2px solid skyblue; border-radius: 5px;">
             <option value="0">제조사
             <option value="삼성">삼성
             <option value="LG">LG
          </select>
       </div>
       
-      <div style="margin: 10px 0 0 100px;">
+      <div style="margin: 50px 0 0 900px;">
          상품코드<br>
-         <input type="text" name="productNum">
+         <input type="text" name="productNum" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
-      <div style="margin: 30px 0 0 100px;">
+      <div style="margin: -90px 0 0 100px;">
          상품가격<br>
-         <input type="text" name="productPee">원
+         <input type="text" name="productPee" style="border: 2px solid skyblue; width:200px; border-radius: 5px;">원
       </div>
       
       <div style="margin: 10px 0 0 100px; height: 100px;">
          상품수량<br>
-         <input type="text" name="productQuantity">개
+         <input type="text" name="productQuantity"  style="border: 2px solid skyblue; width:200px; border-radius: 5px;">개
       </div>
 
       
@@ -193,7 +193,7 @@
             <div class="form-inline mb-2">
                <label class="input-group-addon mr-3 insert-label">썸네일</label>
                <div class="boardImg" id="titleImgArea">
-                  <img id="titleImg" width="200" height="200">
+                  <img id="titleImg" width="200" height="200" style="border: 2px solid skyblue; border-radius: 5px;">
                </div>
             </div>
          </div>

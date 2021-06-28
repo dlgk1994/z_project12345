@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.root.admin.product.dto.boardQnaRepDTO;
+import com.care.root.adminProduct.mtbatis.productMapper;
 import com.care.root.board.dto.EnquiryDTO;
 import com.care.root.board.mybatis.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Autowired BoardMapper mapper;
-
+	@Autowired productMapper replyMapper; 
 	@Override
 	public void notice(Model model, int num) {
 		int pageLetter = 10; //한페이지에 3개의 글
@@ -73,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void selectQna(Model model, int enquiry_no) {
 		model.addAttribute("selectQna", mapper.selectQna(enquiry_no));
+		
 	}
 	//Q&A 검색
 	@Override
@@ -108,6 +111,14 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteQna(int enquiry_no) {
 		mapper.deleteQna(enquiry_no);
 	}
+	//답글내용 보기
+	public void getRepList(int enquiry_no, Model model) {
+		boardQnaRepDTO dto = new boardQnaRepDTO();
+		
+		model.addAttribute("RepList",replyMapper.getRepList(enquiry_no));
+		
+	}
+	
 	
 	
 	
