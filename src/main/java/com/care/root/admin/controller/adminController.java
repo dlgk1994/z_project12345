@@ -369,9 +369,6 @@ public class adminController {
 							@RequestParam int enquiryReplyNo,
 							@Param(value = "eReplyContent") String eReplyContent) {
 		
-		System.out.println("수정할 글 번호 : "+enquiryReplyNo);
-		System.out.println("수정 답변 내용 : " + request.getParameter("eReplyContent"));
-		System.out.println("수정 답변 번호 : " + request.getParameter("enquiryReplyNo"));
 		ps.replyModify(enquiryReplyNo,eReplyContent);
 		return "redirect:board/qna";
 	}

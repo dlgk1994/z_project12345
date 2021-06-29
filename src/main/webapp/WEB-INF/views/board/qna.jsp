@@ -45,7 +45,7 @@
 				</c:if>
 				<c:forEach var="dto" items="${ qnaList }">
 				<tr>
-					<td>${ dto.enquiry_no }</td>
+					<td name="enquiry_no">${ dto.enquiry_no }</td>
 					<td>${ dto.enquiry_state }</td>
 					<td>
 						<a href="${ contextPath }/board/selectQna?enquiry_no=${ dto.enquiry_no }">${ dto.enquiry_subject }</a> 

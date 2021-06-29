@@ -58,7 +58,7 @@
 					</c:if>
 				</c:if>
 				<input type="button" value="리스트로 돌아가기" onclick="location.href='${ contextPath }/board/qna'"><br><br>
-			
+				
 			<!-- 답글보기 -->
 			<c:choose>
 				<c:when test=""> <!-- ${login == user && RepList.eReplyCheck == 1} -->
@@ -80,7 +80,7 @@
 					<b>담당자</b><br><br>
 				<c:if test="${RepList.eReplyCheck == 1 }"><!-- 답변 있을때 수정 -->
 					<textarea rows="10" cols="50" name="eReplyContent">${RepList.eReplyContent}</textarea><br>
-					<input type="submit" <%-- onclick="location.href='${contextPath }/replyModify?enquiryReplyNo=${ selectQna.enquiry_no }'" --%> value="수정">
+					<input type="submit" value="수정">
 					<input type="button" onclick="slide_hide()" value="닫기">
 				</c:if>
 				<c:if test="${RepList.eReplyCheck != 1 }"><!-- 답변 없을때 등록 -->
@@ -128,6 +128,7 @@
 				alert('성공적으로 답글이 달렸습니다');
 				slide_hide()
 				replyData()// 답글 단 후 바로 그 페이지에서 답글 단 것을 볼수있게 하기 위해서
+				
 				
 			},
 			erorr : function () {

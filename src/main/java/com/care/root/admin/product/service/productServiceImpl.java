@@ -630,8 +630,6 @@ public class productServiceImpl implements productService{
 			boardQnaRepDTO dto = new boardQnaRepDTO();
 			dto.setEnquiryReplyNo(enquiryReplyNo);
 			dto.seteReplyContent(eReplyContent);
-			System.out.println("서비스 답변 번호 : " + dto.getEnquiryReplyNo());
-			System.out.println("서비스 답변 수정내용 : " + dto.geteReplyContent());
 			mapper.replyModify(dto);
 			
 		}

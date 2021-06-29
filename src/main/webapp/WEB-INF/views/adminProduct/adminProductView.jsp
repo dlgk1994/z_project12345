@@ -22,13 +22,13 @@
     
 <style type="text/css">
 	.wrap{width: 1200px;height: 800px; margin: -490px 0 0 140px;}
-	.t{width: 1500px; height: 1000px;  margin: auto;}
+	.t{width: 1500px;  margin: auto;}
 	.subTitle{margin-left: 450px; font-size: 40px;}
 	.iTitle{margin: 20px 0 0 100px; height: 20px; }
 	/* .#ProName{margin: 100px 0 0 500px} */
 
 	.inpuptTile{width: 400px;}
-	.t{width: 1500px; height: 1000px;  margin: auto; }
+	.t{width: 1500px;   margin: auto; }
 	.category1{margin: 20px 0 0 100px; border: 1px solid black;}
 	.category2{margin: 40px 0 0 100px; border: 1px solid black;}
 	
@@ -47,9 +47,9 @@
 <script src="${contextPath}/resources/summernote/js/mySummernote.js"></script>
 <script type="text/javascript">
 	//summernoet
-	$(document).ready(function() { /* 이거 없으면 summernote 없어짐 */
-	  $('#summernote').summernote();
-	});
+	//$(document).ready(function() { /* 이거 없으면 summernote 없어짐 */
+	  //$('#summernote').summernote();
+	//});
 	
 	
 	// 취소버튼
@@ -153,20 +153,20 @@
 		</div>
 		
 		<div>
-			<select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;" value="${productView.productCategory }">
+			<select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;" >
 				<option value="0">카테고리
-				<option value="휴대폰">휴대폰
-				<option value="스마트워치">스마트 워치
-				<option value="블루투스 이어폰">블루투스 이어폰
-				<option value="태블릿PC">태블릿PC
+				<option value="휴대폰" <c:if test="${productView.productCategory=='휴대폰'}"> selected </c:if>>휴대폰
+				<option value="스마트워치" <c:if test="${productView.productCategory=='스마트워치'}"> selected </c:if>>스마트 워치
+				<option value="블루투스 이어폰" <c:if test="${productView.productCategory=='블루투스 이어폰'}"> selected </c:if>>블루투스 이어폰
+				<option value="태블릿PC" <c:if test="${productView.productCategory=='태블릿PC'}"> selected </c:if>>태블릿PC
 			</select>
 		</div>
 		
 		<div>
-			<select name="productCompany" style="border: 2px solid skyblue; border-radius: 5px;" class="category2" value="${productView.productCompany }">
+			<select name="productCompany" style="border: 2px solid skyblue; border-radius: 5px;" class="category2">
 				<option value="0">제조사
-				<option value="삼성">삼성
-				<option value="LG">LG
+				<option value="삼성" <c:if test="${productView.productCompany=='삼성'}"> selected </c:if>>삼성
+				<option value="LG" <c:if test="${productView.productCompany=='LG'}"> selected </c:if>>LG
 			</select>
 		</div>
 		
@@ -221,7 +221,7 @@
 	</form>
 </div>
 	</div>
-<div>
+<div style="margin-top: 50%">
 <jsp:include page="../footer.jsp" />
 </div>
 	<!-- Bootstrap core JS-->

@@ -221,7 +221,7 @@
    </form>
 </div>
    </div>
-<div style="margin-bottom: 10px;">
+<div style="margin-top: 50%">
 <jsp:include page="../footer.jsp" />
 </div>
    <!-- Bootstrap core JS-->

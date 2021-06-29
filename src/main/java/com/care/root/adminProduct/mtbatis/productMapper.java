@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
+import com.care.root.board.dto.EnquiryDTO;
 import com.care.root.board.dto.NoticeDTO;
 //상품등록 Mapper
 public interface productMapper {
@@ -46,7 +47,7 @@ public interface productMapper {
 	public NoticeDTO contentView(int notice_no);
 
 
-	public void addReply(boardQnaRepDTO dto);
+	public int addReply(boardQnaRepDTO dto);
 
 
 	public void replyView(int num);
@@ -62,6 +63,15 @@ public interface productMapper {
 
 
 	public void replyModify(boardQnaRepDTO dto);
+
+
+	public ArrayList<EnquiryDTO> repCheck(int enquiry_no);
+
+
+	
+
+
+
 
 
 	
