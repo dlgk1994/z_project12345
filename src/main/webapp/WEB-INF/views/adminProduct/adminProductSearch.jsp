@@ -13,7 +13,7 @@
 
 
 <style type="text/css">
-	.wrap{width: 1200px;height: 400px; margin: 20px 0 0 200px;}
+	.wrap{width: 1200px;height: 400px; margin: 0px 0 0 240px;}
 	.button{margin: 0 0 0 900px;}
 	.container{margin-top: 20px;}
 	#b3{margin-top: 10px; margin-left: 10px;}
@@ -27,7 +27,7 @@
 
 </head>
 <body>
-<c:import url="../header.jsp"/>
+<jsp:include page="../header.jsp" />
 
 <aside>
 	<jsp:include page="../aside.jsp" />						
@@ -36,7 +36,7 @@
 
 <div class="wrap">
 
-	<h3>상품관리</h3>
+	<h1>상품관리</h1>
 	<div class="button">
 		<%-- <button type="button" class="btn btn-outline-primary" id="b1" onclick="${contextPath }/adminProduct/adminProductDelete?productNum=${dto.productNum}">선택삭제</button>
 		<button type="button" class="btn btn-outline-primary" id="b2" onclick="">전체삭제</button> --%>
@@ -53,63 +53,22 @@
 	        <th>상품가격</th>
 	        <th>등록일자</th>
 	      </tr>
-	      <c:if test="${adminProductList.size() ==0 }">
-	      	<tr><td colspan="5">등록된 글이 없습니다</td></tr>
+	      <c:if test="${productSearch.size() ==0 }">
+	      	<tr><td colspan="5">검색된 글이 없습니다</td></tr>
 	      </c:if>
 	    </thead>
 	    <tbody>
-	    <c:forEach var="dto" items="${adminProductList }">
+	    <c:forEach var="dto" items="${productSearch }">
 	      <tr style="text-align: center;">
 	      	<td><input type="checkbox" class="choice" name="choice" id="choice" value="${dto.productNum}"></td>
 	        <td width="100px;">${dto.productNum }</td>
 	        <td width="400px;"><a href="${contextPath }/adminProduct/adminProductView?productNum=${dto.productNum}">${dto.productTitle }</a></td>
 	        <td>${dto.productPee }</td>
 	        <td>${dto.productDate }</td>
-	        <%-- <td>
-	        <c:if test="${dto.productNum == productImgView.parent_board_no }">
-	        	<c:set var="src" value="${contextPath}${productImgView.filePath}/${productImgView.fileName}"/>
-				<div class="thumbnail">
-		            <div class="form-inline mb-2">
-		               <label class="input-group-addon mr-3 insert-label">썸네일</label>
-		               <div class="boardImg" id="titleImgArea">
-		                  <img id="titleImg" width="100" height="100" src="${src}">
-		               </div>
-		            </div>
-		         </div>
-		    </c:if>
-	        </td> --%>
 	      </tr> 
 	     </c:forEach>
 	    </tbody>  	
 	  </table>
-	  
-	  <div style="display: flex; margin: 0 0 0 0px; padding-bottom: 10px;">
-   		<a href="${contextPath }/adminProduct/adminProductList?num=1" id="a" class="page-link"><<</a>
-   		<c:if test="${prev }">
-			<a href="${contextPath }/adminProduct/adminProductList?num=${prevPage}" id="a" class="page-link">이전</a>
-		</c:if>
-		<c:forEach var = "num" begin="${startPageNum }" end="${endPageNum }">	
-			<span>
-				<c:if test="${select != num }">
-					<a href="${contextPath }/adminProduct/adminProductList?num=${num}" id="a" class="page-link">${num }</a>				
-				</c:if>
-
-				<c:if test="${select == num }">
-					<a href="${contextPath }/adminProduct/adminProductList?num=${num}" id="a" class="page-link"><b>${num }</b></a>
-				</c:if>
-			</span>	
-		</c:forEach>
-		<c:if test="${next }">
-			<a href="${contextPath }/adminProduct/adminProductList?num=${nextPage}" id="a" class="page-link">다음</a>
-		</c:if>
-		<a href="${contextPath }/adminProduct/adminProductList?num=${repeat }" id="a" class="page-link">>></a>
-   	  </div>
-   	  
-	  <div style="margin: -43px 0 0 990px;">
-	  	<button type="button" class="btn btn-outline-primary"  onclick="input()">상품등록</button>
-		<input type="button" class="btn btn-outline-primary" id="b1" onclick="deleteValue();" value="선택삭제"/>
-	  </div>
-	  
 	  <form action="${ contextPath }/adminProduct/adminProductSearch">
 			<select name="ProductSearch_option">
 	        	<option value="product_num"<c:if test="${ProductSearch_option eq 'product_num'}">selected</c:if>>상품번호</option>
@@ -118,8 +77,12 @@
 	        </select>
 			   <input type="text" name="keyword" value="${keyword}">
 			   <input type="submit" id="searchBtn" value="검색">
+			   <input type="button" onclick="location.href='${ contextPath }/adminProduct/adminProductList'" value="목록이동">
 		</form>
-	  
+	  <div style="margin: -30px 0 0 990px">
+	  	<button type="button" class="btn btn-outline-primary"  onclick="input()">상품등록</button>
+		<input type="button" class="btn btn-outline-primary" id="b1" onclick="deleteValue();" value="선택삭제"/>
+	  </div>
 	  
 </div>	
 </div>

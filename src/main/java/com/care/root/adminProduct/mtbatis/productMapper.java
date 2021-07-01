@@ -68,6 +68,13 @@ public interface productMapper {
 	public ArrayList<EnquiryDTO> repCheck(int enquiry_no);
 
 
+	public void replyState(EnquiryDTO edto);
+
+
+	// public ArrayList<productDTO> adminProductSearch(Map<String, String> map);
+
+	public List<String> adminProductSearch(Map<String, String> map);
+
 	
 
 

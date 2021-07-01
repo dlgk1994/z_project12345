@@ -21,16 +21,16 @@
     
     
 <style type="text/css">
-   .wrap{width: 1200px;height: 800px; margin: -490px 0 0 140px;}
+   .wrap{width: 1200px;height: 800px; margin: 0px 0 0 140px;}
    .t{width: 1500px; height: 1000px;  margin: auto;}
    .subTitle{margin-left: 450px; font-size: 40px;}
    .iTitle{margin: 20px 0 0 100px; height: 20px; }
    /* .#ProName{margin: 100px 0 0 500px} */
 
    .inpuptTile{width: 400px;}
-   .t{width: 1500px; height: 1000px;  margin: auto; }
-   .category1{margin: 20px 0 0 100px; border: 1px solid black;}
-   .category2{margin: 40px 0 0 100px; border: 1px solid black;}
+   
+   .category1{margin: 20px 0 0 48px; border: 1px solid black;}
+   .category2{margin: 40px 0 0 48px; border: 1px solid black;}
    
    .thumbnail{width:150px; height:200px; margin: -400px 0 0 900px; }
    
@@ -42,6 +42,8 @@
    .button{margin: 10px 0 0 900px; height: 900px;}
    #ok{font-size: 16px;}
    #cancel{font-size: 16px;}
+   aside ul li { margin-bottom: 10px; list-style: none; }
+ 	aside { float: left; width: 200px; padding: 0 0 0 10px; }
 </style>
    <!-- summernote 사용 시 필요한 js 파일 추가 -->
    <script src="${contextPath}/resources/summernote/js/mySummernote.js"></script>
@@ -136,8 +138,10 @@
 </head>
 <body>
 <jsp:include page="../header.jsp" />
+<aside>
+	<jsp:include page="../aside.jsp" />						
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
    
 <div class="wrap">
    <h1 class="subTitle" >상품등록</h1><!--                                             입력값 전달 -->
@@ -152,7 +156,7 @@
          <input type="text" name="productName" class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
-      <div>
+      <!-- <div>
          <select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;">
             <option value="0">카테고리
             <option value="휴대폰">휴대폰
@@ -168,7 +172,7 @@
             <option value="삼성">삼성
             <option value="LG">LG
          </select>
-      </div>
+      </div> -->
       
       <div style="margin: 50px 0 0 900px;">
          상품코드<br>
@@ -221,7 +225,7 @@
    </form>
 </div>
    </div>
-<div style="margin-top: 50%">
+<div style="margin-top: 100%">
 <jsp:include page="../footer.jsp" />
 </div>
    <!-- Bootstrap core JS-->

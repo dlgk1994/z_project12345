@@ -20,7 +20,7 @@
 <style type="text/css">
 	section#container { padding: 20px 0; border-top: 2px solid #eee; border-bottom: 2px solid #eee; }
  	section#container::after { content: ""; display: block; clear: both; }
-	aside { float: left; width: 200px; padding: 0 0 0 10px; }
+	aside { float: left; width: 200px; padding: 0 0 0 20px; }
  	div#container_box { float: right; width: calc(100% - 200px - 20px); }
  	aside ul li { margin-bottom: 10px; list-style: none; }
  	
@@ -29,16 +29,10 @@
 </head>
 <body>
 	<c:import url="../header.jsp"/>	
+	<c:import url="../aside.jsp"/>
 	<section id="container">
 		<aside>
-			<c:choose>
-				<c:when test="${login == admin }"> <!-- 관리자 로그인 하면 관리자에 맞게 왼쪽에 카텔고리 바뀜 -->
-					<jsp:include page="../adminCategory/category.jsp" />
-				</c:when>
-				<c:otherwise>
-					<c:import url="../aside.jsp"/>
-				</c:otherwise>
-			</c:choose>					
+			<jsp:include page="../adminCategory/category.jsp" />						
 		</aside>
 		<div id="container_box">
 		<h3>자주하는 질문</h3>

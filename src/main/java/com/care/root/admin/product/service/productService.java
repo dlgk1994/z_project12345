@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
+import com.care.root.board.dto.EnquiryDTO;
 import com.care.root.board.dto.NoticeDTO;
 
 //상품등록 서비스인터페이스
@@ -35,6 +36,9 @@ public interface productService {
 	public String noticeModify(HttpServletRequest request,int notice_no);
 	public String noticeDelete(int notice_no, HttpServletRequest request);
 	public void replyModify(int enquiryReplyNo, String eReplyContent);
+	public void replyState(EnquiryDTO edto,int replyno);
+	public void adminProductSearch(Model model, String productSearch_option, String keyword);
+	
 	
 	
 	

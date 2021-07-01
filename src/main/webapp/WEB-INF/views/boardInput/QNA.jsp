@@ -39,8 +39,11 @@
 <body>
 
 <jsp:include page="../header.jsp" />
+<aside>
+	<jsp:include page="../adminCategory/category.jsp" />						
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
+
 	<!-- 게시판 클릭시 이용자는 읽기만 관리자는 답변기능  -->
 	<!-- QnA 보기 페이지 -->
 	<div class="wrap">

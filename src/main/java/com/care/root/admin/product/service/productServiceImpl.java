@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -26,6 +27,7 @@ import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 import com.care.root.adminProduct.mtbatis.productMapper;
+import com.care.root.board.dto.EnquiryDTO;
 import com.care.root.board.dto.NoticeDTO;
 import com.care.root.board.service.BoardService;
 import com.care.root.board.service.BoardServiceImpl;
@@ -633,6 +635,28 @@ public class productServiceImpl implements productService{
 			mapper.replyModify(dto);
 			
 		}
+
+		@Override
+		public void replyState(EnquiryDTO edto, int replyno) {
+			edto.setEnquiry_no(replyno);
+			edto.setEnquiry_state("1");
+			mapper.replyState(edto);
+			
+			
+		}
+
+		@Override
+		public void adminProductSearch(Model model, String productSearch_option, String keyword) {
+			Map<String, String> map = new HashMap<String, String>();
+			
+			map.put("productSearch_option", productSearch_option);
+			map.put("keyword", keyword);
+			
+			model.addAttribute("productSearch", mapper.adminProductSearch(map));
+			
+		}
+
+		
 
 		
 

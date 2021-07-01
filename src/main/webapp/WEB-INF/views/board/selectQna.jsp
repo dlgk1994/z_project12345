@@ -25,14 +25,16 @@
  	div#container_box { float: right; width: calc(100% - 200px - 20px); }
  	aside ul li { margin-bottom: 10px; list-style: none; }
  	#first {display: none;}
+ 	aside ul li { margin-bottom: 10px; list-style: none; }
+ 	aside { float: left; width: 200px; padding: 0 0 0 10px; }
 </style>
 </head>
 <body>
 	<c:import url="../header.jsp"/>	
+	<aside>
+		<jsp:include page="../aside.jsp" />						
+	</aside>
 	<section id="container">
-		<aside>
-			<c:import url="../aside.jsp"/>				
-		</aside>
 		<div id="container_box">
 		<h3>00 님의 문의글</h3>
 			<form action="" method="post" enctype="multipart/form-data">

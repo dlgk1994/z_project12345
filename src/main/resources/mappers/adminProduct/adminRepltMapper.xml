@@ -10,7 +10,15 @@
 		<result property="enquiryReplyNo" column="enquiry_reply_no"/>
 		<result property="eReplyCheck" column="e_reply_check"/>
 	</resultMap>
-	
+	<resultMap type="com.care.root.board.dto.EnquiryDTO" id="qna">
+		<id property="enquiry_no" column="enquiry_no"/>
+		<result property="member_id" column="member_id"/>
+		<result property="enquiry_subject" column="enquiry_subject"/>
+		<result property="enquiry_content" column="enquiry_content"/>
+		<result property="enquiry_hit" column="enquiry_hit"/>
+		<result property="enquiry_writedate" column="enquiry_writedate"/> 
+		<result property="enquiry_state" column="enquiry_state"/>
+	</resultMap>
 	
 	<insert id="addReply">
 		insert into enquiry_reply(e_reply_content,enquiry_reply_no,e_reply_check)
@@ -23,6 +31,11 @@
 		UPDATE enquiry_reply SET
 		e_reply_content = #{eReplyContent}
 	   	where enquiry_reply_no=#{enquiryReplyNo}
+	</update>
+	<update id="replyState">
+		UPDATE board_enquiry SET
+		enquiry_state = #{enquiry_state}
+	   	where enquiry_no=#{enquiry_no}
 	</update>
 </mapper>
 

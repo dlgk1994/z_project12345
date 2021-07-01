@@ -60,7 +60,7 @@ public class BoardController {
 		ra.addFlashAttribute("model", model);
 		
 		bs.getRepList(enquiry_no, model);
-		boardQnaRepDTO dto = new boardQnaRepDTO();
+		
 		
 		return "board/selectQna";
 	}

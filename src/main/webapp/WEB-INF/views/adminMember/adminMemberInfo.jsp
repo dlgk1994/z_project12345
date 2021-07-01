@@ -9,21 +9,25 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.t{width: 1500px; height: 1000px;  margin: auto; }
-
-	.wrap{width: 1200px;height: 800px;margin: -490px 0 0 200px;}
+	section#container { padding: 20px 0; border-top: 2px solid #eee; border-bottom: 2px solid #eee; }
+	.wrap{width: 1200px;height: 800px;margin: 0px 0 0 200px;}
 
 
 	.memberName{margin-left: 470px;}
 	.rentalStatus{margin: 40px 0 0 530px;}
-	
-	
+	li {list-style: none;}
+	aside ul li { margin-bottom: 10px; list-style: none; }
+ 	aside { float: left; width: 200px; padding: 0 0 0 10px; }
 </style>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
+<section id="container">
+<aside>
+	<jsp:include page="../aside.jsp" />						
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
-	
+
 	<div class="wrap">
 		<div class="memberName">
 			<h1><b>홍길동</b>님 페이지</h1> <!-- db에 있는 값 가져와서 이름에 넣기 -->
@@ -107,6 +111,7 @@
 	</div>
 	
 </div>
+</section>
 <jsp:include page="../footer.jsp" />
 </body>
 </html>

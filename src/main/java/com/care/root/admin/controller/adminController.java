@@ -327,7 +327,7 @@ public class adminController {
 		NoticeDTO dto = new NoticeDTO();
 		dto.setNotice_title(request.getParameter("notice_title"));
 		dto.setNotice_content(request.getParameter("notice_content"));
-		dto.setNotice_no(400); // 시퀀스 만들어지면 지우고 maaper에 시퀀스로 등록하기
+		dto.setNotice_no(Integer.parseInt(request.getParameter("notice_no"))); // 시퀀스 만들어지면 지우고 maaper에 시퀀스로 등록하기
 		dto.setNotice_group(request.getParameter("notice_group"));
 		
 		
@@ -373,7 +373,32 @@ public class adminController {
 		return "redirect:board/qna";
 	}
 	
+	//회원검색
+	@RequestMapping("adminMember/adminMemberSearch")
+	public void adminMemberSearch(){
+		
+	}
 	
-	
+	//상품검색
+	@RequestMapping("adminProduct/adminProductSearch")
+	public String adminProductSearch(Model model,@RequestParam(defaultValue="product_num") String ProductSearch_option,@RequestParam(defaultValue="") String keyword){
+		ps.adminProductSearch(model,ProductSearch_option,keyword);
+		model.addAttribute("productSearch_option", ProductSearch_option);
+		model.addAttribute("keyword", keyword);
+		
+		return "adminProduct/adminProductSearch";
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+

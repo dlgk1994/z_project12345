@@ -42,8 +42,8 @@
 		
 	</select>
 	<insert id="insertProduct" parameterType="map">
-		insert into product(product_num,product_name,product_title,product_category,product_content,product_company,product_quantity,product_pee)
-		values(#{productNum},#{productName},#{productTitle},#{productCategory},#{productContent},#{productCompany},#{productQuantity},#{productPee})
+		insert into product(product_num,product_name,product_title,product_content,product_quantity,product_pee)
+			values(#{productNum},#{productName},#{productTitle},#{productContent},#{productQuantity},#{productPee})
 	</insert>
 	
 	<select id="adminProductView" resultMap="product">
@@ -179,6 +179,12 @@
 	<delete id="noticeDelete">
 		delete from board_notice where notice_no=#{notice_no}
 	</delete>
+	
+	<select id="adminProductSearch" parameterType="java.util.HashMap" resultMap="product">
+		select * from product where ${productSearch_option} like '%'||#{keyword}||'%'
+   </select>
+	
+        
 	
 </mapper>
 
