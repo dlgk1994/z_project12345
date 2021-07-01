@@ -157,7 +157,7 @@
 			<input type="text" name="productName" class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;"  value="${productView.productName }">
 		</div>
 		
-		<%-- <div>
+		<div>
 			<select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;" >
 				<option value="0">카테고리
 				<option value="휴대폰" <c:if test="${productView.productCategory=='휴대폰'}"> selected </c:if>>휴대폰
@@ -173,7 +173,7 @@
 				<option value="삼성" <c:if test="${productView.productCompany=='삼성'}"> selected </c:if>>삼성
 				<option value="LG" <c:if test="${productView.productCompany=='LG'}"> selected </c:if>>LG
 			</select>
-		</div> --%>
+		</div>
 		
 		<div style="margin: 50px 0 0 900px;">
 			상품코드<br>
