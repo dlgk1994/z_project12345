@@ -6,3 +6,5 @@ create table board_notice(
   notice_title VARCHAR2(100),
   notice_hit number(10) default 0
 );
+
+create sequence notice_seq;

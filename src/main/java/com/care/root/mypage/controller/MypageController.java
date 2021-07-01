@@ -2,6 +2,7 @@ package com.care.root.mypage.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.root.mypage.dto.CartDTO;
 import com.care.root.mypage.service.MypageFileService;
 import com.care.root.mypage.service.MypageService;
 
@@ -45,10 +48,29 @@ public class MypageController {
 		return sum;
 	}*/
 	//장바구니 내역 삭제
-	@RequestMapping("deleteCart")
-	public String deleteCart(@RequestParam int write_no, @RequestParam String cart_photo) {
-		ms.deleteCart(write_no, cart_photo);
-		return "mypage/myCart";
+	@RequestMapping(value="/deleteCart", method=RequestMethod.POST)
+	@ResponseBody
+	public int deleteCart(@RequestParam(value = "chbox[]") List<String> chArr, @RequestParam String cart_photo, CartDTO cart) {
+		//ms.deleteCart(cart_no, cart_photo);
+		//MemberVO member = (MemberVO)session.getAttribute("member");
+		//String userId = member.getUserId();
+		 
+		int result = 0;
+		int cartNum = 0;
+		 
+		 
+		//if(member != null) {
+		//	cart.setUserId(userId);
+		//	cart.setCart_photo(cart_photo);
+		  
+			for(String i : chArr) {   
+				cartNum = Integer.parseInt(i);
+				cart.setCart_no(cartNum);
+		//		ms.deleteCart(cart);
+			}   
+			result = 1;
+		//}  
+		return result;  
 	}
 	//주문 내역 전체 목록
 	@RequestMapping("myRental")

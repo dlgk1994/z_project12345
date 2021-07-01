@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.care.root.mypage.mybatis.MypageMapper">
 	<resultMap type="com.care.root.mypage.dto.CartDTO" id="cart">
-		<id property="write_no" column="write_no"/>
+		<id property="cart_no" column="cart_no"/>
 		<result property="product_num" column="product_num"/>
 		<result property="product_name" column="product_name"/>
 		<result property="payment_total" column="payment_total"/>
@@ -26,7 +26,7 @@
 	<!-- 장바구니 -->
 	<select id="myCart" resultMap="cart">
 		select B.* from(select rownum rn, A.* from
-		(select * from cart order by write_no desc)A)B where rn between #{s} and #{e}
+		(select * from cart order by cart_no desc)A)B where rn between #{s} and #{e}
 	</select>
 	<!-- 장바귄 전체 목록 수 -->
 	<select id="mycartCount" resultType="Integer">
@@ -34,7 +34,7 @@
 	</select>
 	<!-- 장바구니 내역 삭제 -->
 	<delete id="deleteCart">
-		delete from cart where write_no=#{write_no}
+		delete from cart where cart_no=#{cart_no} and member_id=#{member_id}
 	</delete>
 	
 	

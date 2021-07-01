@@ -2,7 +2,7 @@ package com.care.root.mypage.dto;
 
 public class CartDTO {
 	//장바구니 DB
-	private int write_no; //글번호
+	private int cart_no; //장바구니 번호
 	private String product_num; //상품코드
 	private String product_name; //상품이름
 	private int payment_total; //총금액
@@ -10,11 +10,11 @@ public class CartDTO {
 	private String cart_photo; //상품사진
 	private String member_id; //아이디
 	
-	public int getWrite_no() {
-		return write_no;
+	public int getCart_no() {
+		return cart_no;
 	}
-	public void setWrite_no(int write_no) {
-		this.write_no = write_no;
+	public void setCart_no(int cart_no) {
+		this.cart_no = cart_no;
 	}
 	public String getProduct_num() {
 		return product_num;

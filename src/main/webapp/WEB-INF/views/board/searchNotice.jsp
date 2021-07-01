@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,43 +29,28 @@
 	<c:import url="../header.jsp"/>	
 	<section id="container">
 		<aside>
-			<c:choose> 
-				<c:when test=""><!-- 관리자 로그인 하면 관리자에 맞게 왼쪽에 카텔고리 바뀜 
-					<jsp:include page="../adminCategory/category.jsp" />-->
-					
-				</c:when>
-				<c:otherwise>
-					<c:import url="../aside.jsp"/>
-				</c:otherwise>
-			</c:choose>					
+			<c:import url="../aside.jsp"/>				
 		</aside>
 		<div id="container_box">
-		<h3>공지사항</h3>
-		<c:choose>
-			<c:when test=""> <!-- ${login == admin }  관리자가 로그인했을때만 글 쓰기 버튼 보이기 
-				<button type="button" class="btn btn-outline-primary" id="b2" onclick="location.href='../boardInput/noticeInput'" style="margin: 0px 0 0 1060px;">글쓰기</button>
-			-->
-			</c:when>
-		</c:choose>
-			
-		<div style="margin-top: 10px;">
-			<table border="1" style="width: 90%; border-bottom: 1px solid #D5D5D5;">
+		
+		<h3>검색 결과</h3>
+		<div>
+		<input type="button" onclick="location.href='${ contextPath }/board/notice'" value="전체목록">
+			<table border="1" style="width: 90%;">
 				<tr>
 					<th>글번호</th><th>공지분류</th><th>제목</th><th>등록일</th><th>조회수</th>
 				</tr>
-				<c:if test="${ noticeList.size() == 0 }">
-					<tr><th colspan="5">작성된 공지사항이 없습니다</th></tr>
+				<c:if test="${ searchNotice.size() == 0 }">
+					<tr><th colspan="5">일치하는 공지사항이 없습니다</th></tr>
 				</c:if>
-				<c:forEach var="dto" items="${ noticeList }">					
-				<tr><!-- td값 db에서 가져오기 -->
+				<c:forEach var="dto" items="${ searchNotice }">
+				<tr>
 					<td>${ dto.notice_no }</td>
 					<td>${ dto.notice_group }</td>
 					<td>
 						<a href="${ contextPath }/board/selectNotice?notice_no=${ dto.notice_no }">${ dto.notice_title }</a>
 					</td>
-					<fmt:parseDate var="parseRegDate" value="${ dto.notice_writedate }" pattern="yyyy-MM-dd HH:mm:ss" />
-					<fmt:formatDate var="formatRegDate" value="${ parseRegDate }" pattern="yyyy.MM.dd"/>
-					<td>${ formatRegDate }</td>
+					<td>${ dto.notice_writedate }</td>
 					<td>${ dto.notice_hit }</td>
 				</tr>
 				</c:forEach>

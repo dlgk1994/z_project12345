@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,9 @@
 								<a href="">${ dto.product_name }</a> <!-- 상품 링크 걸기 -->
 							</td>
 							<td><a href="${ contextPath }/mypage/selectReview?review_no=${ dto.review_no }">${ dto.review_content }</a></td>
-							<td>${ dto.review_writedate }</td>
+							<fmt:parseDate var="parseRegDate" value="${ dto.review_writedate }" pattern="yyyy-MM-dd HH:mm:ss" />
+							<fmt:formatDate var="formatRegDate" value="${ parseRegDate }" pattern="yyyy.MM.dd"/>
+							<td>${ formatRegDate }</td>
 							
 						</tr>
 					</c:forEach>

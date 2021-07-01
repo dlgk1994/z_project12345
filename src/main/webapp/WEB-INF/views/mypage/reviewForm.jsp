@@ -84,18 +84,18 @@
 						     $(this).addClass("on").prevAll("a").addClass("on");
 						     console.log($(this).attr("value")); //.attr()은 요소(element)의 속성(attribute)의 값을 가져오거나 속성을 추가
 						    
-						     var review_score = $(this).attr("value");
-						     var form = { review_score:review_score };
+						     //var review_score = $(this).attr("value");
+						     //var form = { review_score:review_score };
 						     
 						     $.ajax({
-									url : "star_rating/"+$(this).attr("value"),
-									type : "POST", datadataType : "json",
-									success : function(result) {
-										console.log("성공");
-										console.log(result);
-										$('input[name=review_score]').val(result);
-									}, error : function() { alert('문제 발생') }
-								});
+								url : "star_rating/"+$(this).attr("value"),
+								type : "POST", datadataType : "json",
+								success : function(result) {
+									console.log("성공");
+									console.log(result);
+									$('input[name=review_score]').val(result);
+								}, error : function() { alert('문제 발생') }
+							});
 						     return false;
 						});
 					});

@@ -1,9 +1,5 @@
 package com.care.root.mypage.service;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.care.root.board.dto.MessageDTO;
+import com.care.root.mypage.dto.CartDTO;
 import com.care.root.mypage.dto.ReviewDTO;
 import com.care.root.mypage.mybatis.MypageMapper;
 
@@ -25,6 +21,7 @@ public class MypageServiceImpl implements MypageService {
 	public void myCart(Model model, int num) {
 		int pageLetter = 3; //한페이지에 3개의 글
 		int allCount = mapper.mycartCount(); //총 글 개수 불러오기
+		System.out.println(allCount);
 		
 		int repeat = allCount / pageLetter;
 		if(allCount % pageLetter != 0) { 
@@ -38,12 +35,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 	//장바구니 내역 삭제
 	@Override
-	public void deleteCart(int write_no, String cart_photo) {
+	public void deleteCart(CartDTO cart) {
 		MypageFileService mfs = new MypageFileServiceImpl();
-		int result = mapper.deleteCart(write_no); //성공 시 1 반환
+		int result = mapper.deleteCart(cart.getCart_no(), cart.getMember_id()); //성공 시 1 반환
 		
 		if(result == 1) {
-			mfs.deleteImage(cart_photo);
+			mfs.deleteImage(cart.getCart_photo());
 		}
 		
 	}
