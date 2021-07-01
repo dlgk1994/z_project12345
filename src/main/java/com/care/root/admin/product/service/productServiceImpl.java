@@ -28,6 +28,7 @@ import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 import com.care.root.adminProduct.mtbatis.productMapper;
 import com.care.root.board.dto.EnquiryDTO;
+import com.care.root.board.dto.FaqDTO;
 import com.care.root.board.dto.NoticeDTO;
 import com.care.root.board.service.BoardService;
 import com.care.root.board.service.BoardServiceImpl;
@@ -656,8 +657,61 @@ public class productServiceImpl implements productService{
 			
 		}
 
-		
+		@Override
+		public String faqSave(HttpServletRequest request, FaqDTO dto) {
+			dto.setFaq_group(Integer.parseInt(request.getParameter("faq_group")));
+			dto.setFaq_subject(request.getParameter("faq_subject"));
+			dto.setFaq_content(request.getParameter("faq_content"));
+			productFileService pfs = new productFileServiceImpl();
+			
+			return pfs.faqGetMessage(mapper.faqSave(dto), request); 
+		}
 
+		@Override
+		public String faqDelete(HttpServletRequest request, int faq_no) {
+			
+			productFileService pfs = new productFileServiceImpl();
+			int result = mapper.faqDelete(faq_no);
+			MessageDTO mDTO = new MessageDTO();
+			mDTO.setResult(result);
+			mDTO.setRequest(request);
+			mDTO.setSuccessMessage("성공적으로 삭제 되었습니다");
+			mDTO.setSuccessURL("/board/faq");
+			mDTO.setFailMessage("삭제 중 문제가 발생하였습니다");
+			mDTO.setFailURL("/board/faq");
+			return pfs.getMessage(mDTO);
+		}
+
+		@Override
+		public String faqModify(HttpServletRequest request, int faq_no) {
+			FaqDTO dto = new FaqDTO();
+			dto.setFaq_no(faq_no);
+			dto.setFaq_subject(request.getParameter("faq_subject"));
+			dto.setFaq_content(request.getParameter("faq_content"));
+			
+			productFileService pfs = new productFileServiceImpl();
+			System.out.println("getFaq_no : "+dto.getFaq_no());
+			System.out.println("faq_no : " + faq_no);
+			int result = mapper.faqModify(dto);
+			MessageDTO mDTO = new MessageDTO();
+			mDTO.setResult(result);
+			mDTO.setRequest(request);
+			mDTO.setSuccessMessage("성공적으로 수정되었습니다");
+			mDTO.setSuccessURL("/board/faq");
+			mDTO.setFailMessage("수정 중 문제가 발생하였습니다");
+			mDTO.setFailURL("/board/faqModify");
+			String message = pfs.faqModifyGetMessage(mDTO);
+			return message;
+		}
+
+		@Override
+		public void faqModifyView(int faq_no, Model model) {
+			model.addAttribute("faqModifyView",mapper.faqModifyView(faq_no));
+			
+		}
+
+		
+		
 		
 
 

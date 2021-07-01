@@ -76,6 +76,9 @@
 		</aside>
 		<div id="container_box">
 		<h3>자주하는 질문</h3>
+		<c:if test="${login == admin }"> <!-- 괸리자 로그인 하면 등록, 수정 버튼 생김 -->
+			<input type="button" value="등록" onclick="location.href='${contextPath}/boardInput/faqForm'">
+		</c:if>
 			<div>
 				<div class="container_test">
 				    <ul class="gnb_test">
@@ -89,15 +92,22 @@
 						<p class="faq_group" id="faq_group">전체</p>
 						<ul class="fold_list">
 							<c:forEach var="dto" items="${ allFaq }">
+							<input type="hidden" name="faq_no" value="dto.faq_no">
 								<li>
 									<a href="#" title="View Detail" id="faq_subject" class="faq_subject">${ dto.faq_subject }</a>
-									<div id="faq_content" class="faq_content">${ dto.faq_content }</div>
+									<div id="faq_content" class="faq_content">
+										${ dto.faq_content }
+										<c:if test="${login == admin }">
+											<input type="button" value="수정" onclick="location.href='${contextPath}/boardInput/faqModifyView?faq_no=${dto.faq_no}'">
+											<input type="button" value="삭제" onclick="location.href='${contextPath}/faqDelete?faq_no=${dto.faq_no}'">
+										</c:if>
+									</div>
 								</li>
 							</c:forEach>		
 						</ul>
 				    </div>
 				</div>
-
+				
 				<script type="text/javascript">
 					$( document ).ready(function() {
 						$( ".gnb_test > li > a" ).click(function() { 

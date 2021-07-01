@@ -13,4 +13,6 @@ public interface productFileService {
 	//public String saveFile(MultipartFile file);
 	public String getMessage(MessageDTO DTO);
 	//public void deleteImage(String productThumbnail);
+	public String faqGetMessage(int faqSave, HttpServletRequest request);
+	public String faqModifyGetMessage(MessageDTO mDTO);
 }

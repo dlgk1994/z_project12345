@@ -8,7 +8,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
-	.wrap{width: 900px;height: 800px; margin: -490px 0 0 400px; }
+	.wrap{width: 900px;height: 800px; margin: 0px 0 0 400px; }
 	.t{width: 1500px; height: 1000px;  margin: auto;}
 </style>
 <script type="text/javascript">

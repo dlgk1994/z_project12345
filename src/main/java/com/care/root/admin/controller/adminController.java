@@ -35,6 +35,7 @@ import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 import com.care.root.admin.product.service.productFileService;
 import com.care.root.admin.product.service.productService;
+import com.care.root.board.dto.FaqDTO;
 import com.care.root.board.dto.NoticeDTO;
 
 @Controller //관리자 컨트롤러
@@ -388,6 +389,46 @@ public class adminController {
 		
 		return "adminProduct/adminProductSearch";
 	}
+	@RequestMapping("boardInput/faqForm")
+	public String faqForm() {
+		return "boardInput/faqForm";
+	}
+	
+	@RequestMapping("faqSave")
+	public void faqSave(HttpServletRequest request,@ModelAttribute FaqDTO dto,HttpServletResponse response) throws IOException {
+		String message = ps.faqSave(request, dto);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; chartset=utf-8");
+		out.print(message);
+		
+		
+	}
+	
+	@RequestMapping("faqDelete")
+	public void faqDelete(HttpServletRequest request,HttpServletResponse response,@RequestParam int faq_no) throws IOException {
+		String message = ps.faqDelete(request, faq_no);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; chartset=utf-8");
+		out.print(message);
+		
+	}
+	
+	@RequestMapping("boardInput/faqModifyView")
+	public String faqModifyView(@RequestParam int faq_no, Model model) {
+		ps.faqModifyView(faq_no,model);
+		return "boardInput/faqModifyView";
+	}
+	
+	@RequestMapping("boardInput/faqModify")
+	public void faqModify(HttpServletRequest request,HttpServletResponse response,@RequestParam int faq_no) throws IOException {
+		String message = ps.faqModify(request, faq_no);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; chartset=utf-8");
+		
+		out.print(message);
+		
+	}
+	
 	
 }
 

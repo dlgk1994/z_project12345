@@ -33,6 +33,12 @@
 		<result property="notice_hit" column="notice_hit"/>
 	</resultMap>		
 	
+	<resultMap type="com.care.root.board.dto.FaqDTO" id="faq">
+		<id property="faq_no" column="faq_no"/>
+		<result property="faq_group" column="faq_group"/>
+		<result property="faq_subject" column="faq_subject"/>
+		<result property="faq_content" column="faq_content"/>
+	</resultMap>
 	
 	
 	<select id="adminProductList" resultMap="product">
@@ -184,8 +190,22 @@
 		select * from product where ${productSearch_option} like '%'||#{keyword}||'%'
    </select>
 	
-        
+	<insert id="faqSave">
+		insert into FAQ(faq_no,faq_group,faq_subject,faq_content)
+			values(FAQ_seq.nextval,#{faq_group},#{faq_subject},#{faq_content})
+	</insert>
 	
+	<delete id="faqDelete">
+		delete from FAQ where faq_no=#{faq_no}
+	</delete>
+	
+	<update id="faqModify">
+		update FAQ set faq_subject=#{faq_subject}, faq_content=#{faq_content} where faq_no = #{faq_no}
+	</update>
+	
+	<select id="faqModifyView" resultMap="faq">
+		select * from FAQ where faq_no = #{faq_no}
+	</select>
 </mapper>
 
 

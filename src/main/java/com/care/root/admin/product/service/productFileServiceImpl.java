@@ -65,6 +65,36 @@ public class productFileServiceImpl implements productFileService{
 		
 	}
 
+	@Override
+	public String faqGetMessage(int faqSave, HttpServletRequest request) {
+		String message = null;
+		if(faqSave == 1) {
+			message = "<script>alert('글이 등록되었습니다');";
+			message += "location.href='"+request.getContextPath()+
+						"/board/faq';</script>";
+		}else {
+			message = "<script>alert('문제가 발생하였습니다');";
+			message += "location.href='"+request.getContextPath()+
+						"/boardInput/faqForm';</script>";
+		}
+		return message;
+		
+	}
+
+	@Override
+	public String faqModifyGetMessage(MessageDTO dto) {
+		String message = null;
+		String path = dto.getRequest().getContextPath();
+		if(dto.getResult() == 1) {
+			message = "<script>alert('"+dto.getSuccessMessage()+"');";
+			message += "location.href='"+path+dto.getSuccessURL()+"';</script>";
+		}else {
+			message = "<script>alert('"+dto.getFailMessage()+"');";
+			message += "location.href='"+path+dto.getFailURL()+"';</script>";
+		}
+		return message;
+	}
+
 
 	
 	

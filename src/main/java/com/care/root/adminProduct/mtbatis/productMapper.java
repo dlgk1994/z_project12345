@@ -12,6 +12,7 @@ import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 import com.care.root.board.dto.EnquiryDTO;
+import com.care.root.board.dto.FaqDTO;
 import com.care.root.board.dto.NoticeDTO;
 //상품등록 Mapper
 public interface productMapper {
@@ -73,6 +74,18 @@ public interface productMapper {
 	// public ArrayList<productDTO> adminProductSearch(Map<String, String> map);
 
 	public List<String> adminProductSearch(Map<String, String> map);
+
+
+	public int faqSave(FaqDTO dto);
+
+
+	public int faqDelete(int faq_no);
+
+
+	public int faqModify(FaqDTO dto);
+
+
+	public FaqDTO faqModifyView(int faq_no);
 
 	
 
