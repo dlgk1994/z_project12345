@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,23 +37,22 @@
 			<div>
 				<table border="1" style="width: 90%;">
 					<tr>
-						<th colspan="2">상품명</th><th>내용</th><th>아이디</th><th>등록일</th><th>선택</th>
+						<th>글번호</th><th colspan="2">상품명</th><th>내용</th><th>등록일</th>
 					</tr><c:if test="${ reviewList.size() == 0 }">
 						<tr><th colspan="5">작성한 리뷰가 없습니다</th></tr>
 					</c:if>
 					<c:forEach var="dto" items="${ reviewList }">
 						<tr>
+							<td>${ dto.review_no }</td>
 							<td colspan="2">
-								<img src="${ dto.cart_photo }" style="width: 50px; height: 50px">
-								<a href="#">${ dto.product_name }</a>
+								<img src="${ dto.product_photo }" style="width: 50px; height: 50px">
+								<a href="">${ dto.product_name }</a> <!-- 상품 링크 걸기 -->
 							</td>
-							<td>내용</td>
-							<td>아이디</td>
-							<td>등록일</td>
-							<td>
-								<button type="button" onclick="#">수정</button>
-								<button type="button" onclick="#">삭제</button>
-							</td>
+							<td><a href="${ contextPath }/mypage/selectReview?review_no=${ dto.review_no }">${ dto.review_content }</a></td>
+							<fmt:parseDate var="parseRegDate" value="${ dto.review_writedate }" pattern="yyyy-MM-dd HH:mm:ss" />
+							<fmt:formatDate var="formatRegDate" value="${ parseRegDate }" pattern="yyyy.MM.dd"/>
+							<td>${ formatRegDate }</td>
+							
 						</tr>
 					</c:forEach>
 				</table>

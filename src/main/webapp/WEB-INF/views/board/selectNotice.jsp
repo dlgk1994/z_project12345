@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 <style type="text/css">
 	section#container { padding: 20px 0; border-top: 2px solid #eee; border-bottom: 2px solid #eee; }
  	section#container::after { content: ""; display: block; clear: both; }
-	aside { float: left; width: 200px; padding: 0 0 0 10px; }
+	aside { float: left; width: 200px; padding: 0 0 0 5px; }
  	div#container_box { float: right; width: calc(100% - 200px - 20px); }
  	aside ul li { margin-bottom: 10px; list-style: none; }
 </style>
@@ -32,40 +33,17 @@
 			<c:import url="../aside.jsp"/>				
 		</aside>
 		<div id="container_box">
-		<h3>주문 내역</h3>
-			<div>
-				<table border="1" style="width: 90%;">
-					<tr>
-						<th>주문번호</th><th colspan="2">상품명</th><th>대여가격</th><th>반납일</th><th>선택</th>
-					</tr>
-					<c:if test="${ rentalList.size() == 0 }">
-						<tr><th colspan="5">주문내역이 없습니다</th></tr>
-					</c:if>
-					<c:forEach var="dto" items="${ rentalList }">
-						<tr>
-							<td>${ dto.payment_num }</td>
-							<td colspan="2">
-								<img src="${ dto.cart_photo }" style="width: 50px; height: 50px">
-								<a href="#">${ dto.payment_title }</a>
-							</td>
-							<td>${ dto.payment_total }</td>
-							<td>반납일</td>
-							<td>
-								<button type="button" onclick="location.href='${ contextPath }/mypage/reviewForm'">리뷰작성</button>
-								<!-- ?payment_title=${ dto.payment_title }&cart_photo=${ dto.cart_photo } -->
-								<button type="button" onclick="#">반납</button>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="6">
-								<c:forEach	var="num" begin="1" end="${ repeat }">
-									<a href="${ contextPath }/mypage/myCart?num=${ num }">[${ num }]</a>
-								</c:forEach>
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
+		<h3>${ selectNotice.notice_title }</h3>
+			<form action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" value="${ selectNotice.notice_no }"/>
+				<fmt:parseDate var="parseRegDate" value="${ selectNotice.notice_writedate }" pattern="yyyy-MM-dd HH:mm:ss" />
+				<fmt:formatDate var="formatRegDate" value="${ parseRegDate }" pattern="yyyy.MM.dd"/>
+				<b>작성날짜</b>&nbsp;${ formatRegDate }&nbsp;
+				<b>조회수</b>&nbsp;${ selectNotice.notice_hit }<br><br>
+				<b>내용</b><br>
+				<textarea rows="10" cols="50" name="notice_content" readonly>${ selectNotice.notice_content }</textarea><hr>		
+			</form>
+				<input type="button" value="리스트로 돌아가기" onclick="location.href='${ contextPath }/board/notice'">
 		</div>
 	</section>
 	<c:import url="../footer.jsp"/>

@@ -1,6 +1,7 @@
 package com.care.root.board.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +14,31 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.adminProduct.mtbatis.productMapper;
 import com.care.root.board.dto.EnquiryDTO;
+import com.care.root.board.dto.FaqDTO;
 import com.care.root.board.mybatis.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Autowired BoardMapper mapper;
+<<<<<<< HEAD
+
+	//자주하는 질문 전체 목록
+	@Override
+	public void faq(Model model) {
+		
+		model.addAttribute("allFaq",mapper.faq());
+	}
+	//자주하는 질문 그룹별 목록
+	@Override
+	public ArrayList<FaqDTO> faqList(Model model, int faq_group) {
+		model.addAttribute("faqList",mapper.faqList(faq_group));
+		return mapper.faqList(faq_group);
+	}
+	
+	//공지사항 전체 목록
+=======
 	@Autowired productMapper replyMapper; 
+>>>>>>> kim
 	@Override
 	public void notice(Model model, int num) {
 		int pageLetter = 10; //한페이지에 3개의 글
@@ -34,6 +54,27 @@ public class BoardServiceImpl implements BoardService {
 		
 		model.addAttribute("noticeList", mapper.notice(start, end));
 	}
+	//공지사항 클릭 시 상세보기
+	@Override
+	public void selectNotice(Model model, int notice_no) {
+		upHitNotice(notice_no);
+		model.addAttribute("selectNotice",mapper.selectNotice(notice_no));
+	}
+	//공지사항 클릭 시 조회수 증가
+	public void upHitNotice(int notice_no) {
+		mapper.upHitNotice(notice_no);
+	}
+	//공지사항 검색
+	@Override
+	public void searchNotice(Model model, String search_option, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+
+		model.addAttribute("searchNotice", mapper.searchNotice(map));
+	}
+	
 	//Q&A 전체 목록
 	@Override
 	public void qna(Model model, int num) {
@@ -60,16 +101,11 @@ public class BoardServiceImpl implements BoardService {
 		dto.setEnquiry_content(mul.getParameter("enquiry_content"));
 		dto.setEnquiry_state("답변중");
 
-		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		
-		dto.setEnquiry_writedate(s.format(calendar.getTime()));
-
 		mapper.qnaSave(dto);
 	}
 	//조회수 증가
-	public void upHit(int enquiry_no) {
-		mapper.upHit(enquiry_no);
+	public void upHit(int num) {
+		mapper.upHit(num);
 	}
 	//Q&A 제목 클릭 시 상세보기
 	@Override
@@ -97,12 +133,7 @@ public class BoardServiceImpl implements BoardService {
 		dto.setEnquiry_subject(mul.getParameter("enquiry_subject"));
 		dto.setEnquiry_content(mul.getParameter("enquiry_content"));
 		dto.setEnquiry_state("답변완료");
-		System.out.println(mul.getParameter("enquiry_subject"));
-
-		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		
-		dto.setEnquiry_writedate(s.format(calendar.getTime()));
+		//System.out.println(mul.getParameter("enquiry_subject"));
 
 		mapper.modifySave(dto);
 	}

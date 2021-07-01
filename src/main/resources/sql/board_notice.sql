@@ -5,4 +5,10 @@ create table board_notice(
   notice_writedate date default sysdate,
   notice_title VARCHAR2(100),
   notice_hit number(10) default 0
+<<<<<<< HEAD
 );
+
+create sequence notice_seq;
+=======
+);
+>>>>>>> kim

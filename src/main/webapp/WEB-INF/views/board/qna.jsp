@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,28 @@
 		<h3>Q&A</h3>
 		<div>
 		<input type="button" onclick="location.href='${ contextPath }/board/qnaForm'" value="글쓰기">
+<<<<<<< HEAD
+			<table border="1" style="width: 90%;">
+				<tr>
+					<th>글번호</th><th>답변현황</th><th>제목</th><th>글쓴이</th><th>등록일</th>
+				</tr>
+				<c:if test="${ qnaList.size() == 0 }">
+					<tr><th colspan="5">질문 내역이 없습니다</th></tr>
+				</c:if>
+				<c:forEach var="dto" items="${ qnaList }">
+				<tr>
+					<td>${ dto.enquiry_no }</td>
+					<td>${ dto.enquiry_state }</td>
+					<td>
+						<a href="${ contextPath }/board/selectQna?enquiry_no=${ dto.enquiry_no }">${ dto.enquiry_subject }</a> 
+					</td>
+					<td>${ dto.member_id }</td>
+					<fmt:parseDate var="parseRegDate" value="${ dto.enquiry_writedate }" pattern="yyyy-MM-dd HH:mm:ss" />
+					<fmt:formatDate var="formatRegDate" value="${ parseRegDate }" pattern="yyyy.MM.dd"/>
+					<td>${ formatRegDate }</td>
+				</tr>
+				</c:forEach>
+=======
 			<table style="width: 90%;" class="table table-striped">
 				<thead>
 					<tr>
@@ -68,6 +91,7 @@
 					</tr>
 					</c:forEach>
 				</tbody> 
+>>>>>>> kim
 			</table>
 		</div>
 		<div>
@@ -79,7 +103,7 @@
 	    
 	        	<option value="enquiry_content"<c:if test="${search_option eq 'enquiry_content'}">selected</c:if>>내용</option>
 	   			
-	   			<option value="all"<c:if test="${search_option eq 'all'}">selected</c:if>>작성자+내용+제목</option>
+	   			<option value="all"<c:if test="${search_option eq 'all'}">selected</c:if>>작성자+제목+내용</option>
 	   		</select>
 			   <input type="text" name="keyword" value="${ keyword }">
 			   <input type="submit" id="searchBtn" value="검색">

@@ -41,7 +41,7 @@
 					<th>글번호</th><th>답변현황</th><th>제목</th><th>글쓴이</th><th>등록일</th><th>선택</th>
 				</tr>
 				<c:if test="${ searchQna.size() == 0 }">
-					<tr><th colspan="5">질문 내역이 없습니다</th></tr>
+					<tr><th colspan="5">일치하는 질문 내역이 없습니다</th></tr>
 				</c:if>
 				<c:forEach var="dto" items="${ searchQna }">
 				<tr>

@@ -33,29 +33,27 @@
 		</aside>
 		<div id="container_box">
 		<h3>내 질문</h3>
-			<div>
+			<div>			
 				<table border="1" style="width: 90%;">
 					<tr>
 						<th>글번호</th><th>답변현황</th><th>제목</th><th>글쓴이</th><th>등록일</th><th>선택</th>
 					</tr>
-					<c:choose>
-						<c:when test="">
-							<tr>
-								<td>글번호</td>
-								<td>답변현황</td>
-								<td>제목</td>
-								<td>글쓴이</td>
-								<td>등록일</td>
-								<td>
-									<button type="button" onclick="#">수정</button>
-									<button type="button" onclick="#">삭제</button>
-								</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<tr><td colspan="5">작성한 질문이 없습니다</td></tr>
-						</c:otherwise>
-					</c:choose>
+					<c:if test="${ rentalList.size() == 0 }">
+						<tr><th colspan="5">작성한 질문이 없습니다</th></tr>
+					</c:if>
+					<c:forEach var="dto" items="${ rentalList }">
+						<tr>
+							<td>글번호</td>
+							<td>답변현황</td>
+							<td>제목</td>
+							<td>글쓴이</td>
+							<td>등록일</td>
+							<td>
+								<button type="button" onclick="#">수정</button>
+								<button type="button" onclick="#">삭제</button>
+							</td>
+						</tr>					
+					</c:forEach>
 				</table>
 			</div>		
 		</div>

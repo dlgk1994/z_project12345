@@ -70,7 +70,7 @@
 				<c:forEach var="dto" items="${ cartList }">
 					<tr>
 						<td>
-							<input type="checkbox" name="chbox" class="chbox" value="${ dto.payment_total }">
+							<input type="checkbox" name="chbox" class="chbox" value="${ dto.payment_total }" data-cartNum="${ dto.cart_no }">
 							<script>
  								$(".chbox").click(function(){
 									$("#allCheck").prop("checked", false);
@@ -102,7 +102,7 @@
 						<td>${ dto.cart_state }</td>
 						<td>
 							<button type="button" onclick="#">대여</button>
-							<button type="button" onclick="${ contextPath }/mypage/deleteCart?write_no=${ dto.write_no }&cart_photo=${ cart_photo }">삭제</button>
+							<button type="button" onclick="${ contextPath }/mypage/deleteCart?cart_no=${ dto.cart_no }&cart_photo=${ cart_photo }">삭제</button>
 						</td>
 					</tr>
 					<c:set var="sum" value="${sum + dto.payment_total}" />
@@ -120,6 +120,34 @@
 						<button type="button" class="select">선택 상품 주문</button>
 						
 						<button type="button">전체 상품 주문</button>
+						<button type="button" class="selectDelete">선택 상품 삭제</button>
+						<script>
+							$(".selectDelete").click(function(){
+								var confirm_val = confirm("정말 삭제하시겠습니까?");
+							  
+								if(confirm_val) {
+									var checkArr = new Array();
+								   
+									$("input[class='chBox']:checked").each(function(){
+										checkArr.push($(this).attr("data-cartNum"));
+									});
+								    
+								 	$.ajax({
+								  		url : "/mypage/deleteCart",
+								 		type : "post",
+								    	data : { chbox : checkArr },
+								    	success : function(result){
+								    		if(result == 1) {          
+								    			location.href = "/mypage/myCart";
+								    		} else {
+								    			alert("삭제 실패");
+								    		}
+								    	}
+								   	});
+							  	} 
+						 	});
+						</script>
+						<button type="button">전체 상품 삭제</button>
 					</td>
 				</tr>
 			</table>

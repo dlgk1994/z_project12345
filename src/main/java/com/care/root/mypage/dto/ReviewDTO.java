@@ -4,11 +4,15 @@ public class ReviewDTO {
 	private int review_no; 
 	private String review_content;
 	private int review_score;
+	//private String org_file_name;
+	//private String save_file_name;
 	private String review_file1;
 	private String review_file2;
 	private String review_file3;
 	private String review_id;
 	private String review_writedate;
+	private String product_name;
+	private String product_photo;
 	
 	public int getReview_no() {
 		return review_no;
@@ -28,6 +32,44 @@ public class ReviewDTO {
 	public void setReview_score(int review_score) {
 		this.review_score = review_score;
 	}
+	/*
+	public String getOrg_file_name() {
+		return org_file_name;
+	}
+	public void setOrg_file_name(String org_file_name) {
+		this.org_file_name = org_file_name;
+	}
+	public String getSave_file_name() {
+		return save_file_name;
+	}
+	public void setSave_file_name(String save_file_name) {
+		this.save_file_name = save_file_name;
+	}*/
+	public String getReview_id() {
+		return review_id;
+	}
+	public void setReview_id(String review_id) {
+		this.review_id = review_id;
+	}
+	public String getReview_writedate() {
+		return review_writedate;
+	}
+	public void setReview_writedate(String review_writedate) {
+		this.review_writedate = review_writedate;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public String getProduct_photo() {
+		return product_photo;
+	}
+	public void setProduct_photo(String product_photo) {
+		this.product_photo = product_photo;
+	}
+	
 	public String getReview_file1() {
 		return review_file1;
 	}
@@ -46,18 +88,8 @@ public class ReviewDTO {
 	public void setReview_file3(String review_file3) {
 		this.review_file3 = review_file3;
 	}
-	public String getReview_id() {
-		return review_id;
-	}
-	public void setReview_id(String review_id) {
-		this.review_id = review_id;
-	}
-	public String getReview_writedate() {
-		return review_writedate;
-	}
-	public void setReview_writedate(String review_writedate) {
-		this.review_writedate = review_writedate;
-	}
+	
+	
 	
 	
 }

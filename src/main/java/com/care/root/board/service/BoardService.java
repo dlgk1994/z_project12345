@@ -1,14 +1,25 @@
 package com.care.root.board.service;
 
+import java.util.ArrayList;
+
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.root.board.dto.FaqDTO;
+
 public interface BoardService {
 	
+	//자주하는 질문 전체 목록
+	public void faq(Model model);
+	//자주하는 질문 그룹별 목록
+	public ArrayList<FaqDTO> faqList(Model model, int faq_group);
 	
-	//공지사항 목록
+	//공지사항 전체 목록
 	public void notice(Model model, int num);
-	
+	//공지사항 클릭 시 상세보기
+	public void selectNotice(Model model, int notice_no);
+	//공지사항 검색
+	public void searchNotice(Model model, String search_option, String keyword);
 	
 	//Q&A 전체 목록
 	public void qna(Model model, int num);
