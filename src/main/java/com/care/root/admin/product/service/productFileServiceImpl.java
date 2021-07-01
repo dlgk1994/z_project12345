@@ -28,21 +28,21 @@ public class productFileServiceImpl implements productFileService{
 		return message;
 	}
 
-	@Override
-	public String saveFile(MultipartFile file) {
-		SimpleDateFormat simp = new SimpleDateFormat("yyyyMMddHHmmss-");
-		Calendar calendar = Calendar.getInstance();
-		String sysFileNAme = 
-				simp.format(calendar.getTime())+file.getOriginalFilename();
-		File saveFile = new File(IMAGE_REPO+"/"+sysFileNAme);
-		try {
-			file.transferTo(saveFile);
-		} catch (Exception e) {
-			
-		}
-		
-		return sysFileNAme;
-	}
+//	@Override
+//	public String saveFile(MultipartFile file) {
+//		SimpleDateFormat simp = new SimpleDateFormat("yyyyMMddHHmmss-");
+//		Calendar calendar = Calendar.getInstance();
+//		String sysFileNAme = 
+//				simp.format(calendar.getTime())+file.getOriginalFilename();
+//		File saveFile = new File(IMAGE_REPO+"/"+sysFileNAme);
+//		try {
+//			file.transferTo(saveFile);
+//		} catch (Exception e) {
+//			
+//		}
+//		
+//		return sysFileNAme;
+//	}
 
 //	public void deleteImage(String originFileName) {
 //		File deleteFile = new File(IMAGE_REPO+"/"+originFileName);

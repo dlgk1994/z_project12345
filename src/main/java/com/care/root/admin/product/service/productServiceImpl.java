@@ -477,7 +477,7 @@ public class productServiceImpl implements productService{
 				// flag == true ==  수정 후 게시글 파일명과 수정전 파일명이 일치하는게 없을 경우
 				// == 새로운 이미지 --> newShopAttachmentList 추가
 				if(flag) {
-					productImageDTO at = new productImageDTO(fName,filePath,1,updateProductDTO.getProductNum());
+					productImageDTO at = new productImageDTO(filePath,fName,1,updateProductDTO.getProductNum());
 					newShopAttachmentList.add(at);
 				}
 				
@@ -561,7 +561,7 @@ public class productServiceImpl implements productService{
 		@Override
 		public List<String> selectDBFileList() {
 			
-			return mapper.selectDBfileList();
+			return mapper.selectDBFileList();
 		}
 
 		@Override

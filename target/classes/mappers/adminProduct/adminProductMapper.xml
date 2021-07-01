@@ -155,14 +155,14 @@
     -->
    SELECT FILE_NAME
 	 FROM PRODUCTIMAGE
-	 <![CDATA[
+	<!--  <![CDATA[
 	 WHERE TO_DATE(SUBSTR(FILE_NAME,0,8),'YYMMDDHH24') < SYSDATE-3
- 	 ]]>
+ 	 ]]> -->
    </select>
 
 	<insert id="noticeWriteSave">
 		insert into board_notice(notice_title,notice_content,notice_no,notice_group)
-		values(#{notice_title},#{notice_content},#{notice_no},#{notice_group})
+		values(#{notice_title},#{notice_content},board_notice_seq.nextval,#{notice_group})
 	</insert>
 	
 	

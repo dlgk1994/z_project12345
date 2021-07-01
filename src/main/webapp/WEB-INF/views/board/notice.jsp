@@ -53,11 +53,7 @@
 					<td>${ dto.notice_no }</td>
 					<td>${ dto.notice_group }</td>
 					<td>
-<<<<<<< HEAD
-						<a href="${ contextPath }/board/selectNotice?notice_no=${ dto.notice_no }">${ dto.notice_title }</a>
-=======
 						<a href="../boardInput/notice?notice_no=${dto.notice_no }">${ dto.notice_title }</a>
->>>>>>> kim
 					</td>
 					<fmt:parseDate var="parseRegDate" value="${ dto.notice_writedate }" pattern="yyyy-MM-dd HH:mm:ss" />
 					<fmt:formatDate var="formatRegDate" value="${ parseRegDate }" pattern="yyyy.MM.dd"/>

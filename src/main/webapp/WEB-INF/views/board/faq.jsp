@@ -72,11 +72,7 @@
 	<c:import url="../aside.jsp"/>
 	<section id="container">
 		<aside>
-<<<<<<< HEAD
-			<c:import url="../aside.jsp"/>				
-=======
-			<jsp:include page="../adminCategory/category.jsp" />						
->>>>>>> kim
+
 		</aside>
 		<div id="container_box">
 		<h3>자주하는 질문</h3>

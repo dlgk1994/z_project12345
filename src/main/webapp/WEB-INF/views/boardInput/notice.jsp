@@ -35,49 +35,6 @@
 
 	<!-- 공지사항 게시글 보는 페이지 -->
 	<div class="wrap">
-		<%-- <h1>공지사항</h1>
-		<form action="${contextPath}/noticeModify?notice_no=${noticeData.notice_no}">
-		<input type="hidden" name="notice_no" value="${noticeData.notice_no}">
-		<c:choose>
-			<c:when test=""><!-- ${login == admin }  관리자가 로그인시 -->
-			<div style="margin-top: 20px;">
-				<select name="notice_group" class="category2">
-					<option value="0">공지분류
-					<option value="[일반공지]" <c:if test="${noticeData.notice_group=='[일반공지]'}"> selected </c:if>>[일반공지]
-					<option value="[당첨발표]" <c:if test="${noticeData.notice_group=='[당첨발표]'}"> selected </c:if>>[당첨발표]
-				</select>
-			</div>
-			<div>
-				<label style="margin: 40px 0 0 0px;">글 제목</label><br>
-				<input type="text" style=" width: 740px;" name="notice_title" value="${noticeData.notice_title }">
-			</div>
-			
-			<div style="margin-top: 20px;">
-				<textarea rows="10" cols="100" name="notice_content">${noticeData.notice_content }</textarea>
-			</div>
-				<input type="submit" class="btn btn-outline-primary" value="수정" id=""  style="margin: 10px 0 0 280px;">
-				<button type="button" class="btn btn-outline-primary" id="" onclick="location.href='${contextPath}/noticeDelete?notice_no=${noticeData.notice_no}'" style="margin: 10px 0 0 70px;" >삭 제</button>
-				<button type="button" class="btn btn-outline-primary" id="" onclick="removeCheck()" style="margin: 10px 0 0 70px;" >취 소</button>
-			</c:when>
-			<c:otherwise> <!-- 이용자가 클릭 했을때 -->
-				<div style="margin-top: 20px;">
-					<input type="text" name="notice_group" value="${noticeData.notice_group }">
-				</div>
-				<div>
-					<label style="margin: 40px 0 0 0px;">글 제목</label><br>
-					<input type="text" style=" width: 740px;" name="notice_title" value="${noticeData.notice_title }" readonly="readonly">
-				</div>
-				
-				<div style="margin-top: 20px;">
-					<textarea rows="10" cols="100" name="notice_content" readonly="readonly">${noticeData.notice_content }</textarea>
-				</div>
-					<button type="button" class="btn btn-outline-primary" id="" onclick="back()" style="margin: 10px 0 0 0px;" >뒤로가기</button>
-			</c:otherwise>
-		</c:choose>
-		</form> --%>
-		
-		<!-- ----------------- -->
-		
 		<form action="${contextPath}/noticeModify?notice_no=${noticeData.notice_no}">
 		<input type="hidden" name="notice_no" value="${noticeData.notice_no}">
 		<c:choose>

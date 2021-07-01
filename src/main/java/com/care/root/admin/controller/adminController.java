@@ -327,7 +327,7 @@ public class adminController {
 		NoticeDTO dto = new NoticeDTO();
 		dto.setNotice_title(request.getParameter("notice_title"));
 		dto.setNotice_content(request.getParameter("notice_content"));
-		dto.setNotice_no(Integer.parseInt(request.getParameter("notice_no"))); // 시퀀스 만들어지면 지우고 maaper에 시퀀스로 등록하기
+		//dto.setNotice_no(Integer.parseInt(request.getParameter("notice_no"))); // 시퀀스 만들어지면 지우고 maaper에 시퀀스로 등록하기
 		dto.setNotice_group(request.getParameter("notice_group"));
 		
 		

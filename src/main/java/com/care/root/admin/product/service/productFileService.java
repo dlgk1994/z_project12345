@@ -10,7 +10,7 @@ import com.care.root.admin.product.dto.MessageDTO;
 public interface productFileService {
 	public static final String IMAGE_REPO = "D:/image_repo";
 	public String getMessage(int num, HttpServletRequest request);
-	public String saveFile(MultipartFile file);
+	//public String saveFile(MultipartFile file);
 	public String getMessage(MessageDTO DTO);
 	//public void deleteImage(String productThumbnail);
 }

@@ -38,8 +38,7 @@ public interface productMapper {
 	public void deleteProductImgList2(List<String> deleteFileNoList);
 	public int delete(List<String> num);
 
-	public List<String> selectDBfileList();
-
+	public List<String> selectDBFileList();
 
 	public void noticeWriteSave(NoticeDTO dto);
 

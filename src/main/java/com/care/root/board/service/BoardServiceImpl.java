@@ -20,7 +20,7 @@ import com.care.root.board.mybatis.BoardMapper;
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Autowired BoardMapper mapper;
-<<<<<<< HEAD
+
 
 	//자주하는 질문 전체 목록
 	@Override
@@ -36,9 +36,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	//공지사항 전체 목록
-=======
+
 	@Autowired productMapper replyMapper; 
->>>>>>> kim
+
 	@Override
 	public void notice(Model model, int num) {
 		int pageLetter = 10; //한페이지에 3개의 글

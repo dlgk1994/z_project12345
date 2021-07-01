@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-<<<<<<< HEAD
 import com.care.root.board.dto.FaqDTO;
-=======
+
 import com.care.root.admin.product.dto.boardQnaRepDTO;
->>>>>>> kim
+
 import com.care.root.board.service.BoardServiceImpl;
 
 @Controller
@@ -84,16 +84,15 @@ public class BoardController {
 	}
 	//Q&A 제목 클릭 시 상세보기
 	@RequestMapping("selectQna")
-	public String selectQna(Model model, @RequestParam int enquiry_no) {
+	public String selectQna(Model model, @RequestParam int enquiry_no,RedirectAttributes ra) {
 		bs.selectQna(model, enquiry_no);
-<<<<<<< HEAD
-=======
+
 		ra.addFlashAttribute("model", model);
 		
 		bs.getRepList(enquiry_no, model);
 		
 		
->>>>>>> kim
+
 		return "board/selectQna";
 	}
 	//Q&A 검색
