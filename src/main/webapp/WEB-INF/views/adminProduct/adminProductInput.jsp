@@ -21,27 +21,29 @@
     
     
 <style type="text/css">
-   .wrap{width: 1200px;height: 800px; margin: -490px 0 0 140px;}
+   .wrap{width: 1200px;height: 800px; margin: 0px 0 0 140px;}
    .t{width: 1500px; height: 1000px;  margin: auto;}
    .subTitle{margin-left: 450px; font-size: 40px;}
    .iTitle{margin: 20px 0 0 100px; height: 20px; }
    /* .#ProName{margin: 100px 0 0 500px} */
 
    .inpuptTile{width: 400px;}
-   .t{width: 1500px; height: 1000px;  margin: auto; }
-   .category1{margin: 20px 0 0 100px; border: 1px solid black;}
-   .category2{margin: 40px 0 0 100px; border: 1px solid black;}
    
-   .thumbnail{width:150px; height:200px; margin: -300px 0 0 900px; }
+   .category1{margin: 20px 0 0 48px; border: 1px solid black;}
+   .category2{margin: 40px 0 0 48px; border: 1px solid black;}
+   
+   .thumbnail{width:150px; height:200px; margin: -400px 0 0 900px; }
    
    
-   .summernote1{width: 1000px;   margin: 60px 0 0 100px;}
+   .summernote1{width: 1000px;   margin: 180px 0 0 100px;}
    
    .file{margin: 0 0 0 100px;}
    
    .button{margin: 10px 0 0 900px; height: 900px;}
    #ok{font-size: 16px;}
    #cancel{font-size: 16px;}
+   aside ul li { margin-bottom: 10px; list-style: none; }
+ 	aside { float: left; width: 200px; padding: 0 0 0 10px; }
 </style>
    <!-- summernote 사용 시 필요한 js 파일 추가 -->
    <script src="${contextPath}/resources/summernote/js/mySummernote.js"></script>
@@ -136,24 +138,26 @@
 </head>
 <body>
 <jsp:include page="../header.jsp" />
+<aside>
+	<jsp:include page="../aside.jsp" />						
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
    
 <div class="wrap">
    <h1 class="subTitle" >상품등록</h1><!--                                             입력값 전달 -->
    <form action="${contextPath }/adminProduct/productSave" method="post" enctype="multipart/form-data">
       <div class="iTitle">
          글제목<br>
-         <input type="text" name=productTitle class="inpuptTile">
+         <input type="text" name=productTitle class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
       <div id="ProName" style="margin: 50px 0 0 100px;">
          상품명<br>
-         <input type="text" name="productName" class="inpuptTile">
+         <input type="text" name="productName" class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
-      <div>
-         <select name="productCategory" class="category1">
+      <!-- <div>
+         <select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;">
             <option value="0">카테고리
             <option value="휴대폰">휴대폰
             <option value="스마트워치">스마트 워치
@@ -163,26 +167,26 @@
       </div>
       
       <div>
-         <select name="productCompany" class="category2">
+         <select name="productCompany" class="category2" style="border: 2px solid skyblue; border-radius: 5px;">
             <option value="0">제조사
             <option value="삼성">삼성
             <option value="LG">LG
          </select>
-      </div>
+      </div> -->
       
-      <div style="margin: 10px 0 0 100px;">
+      <div style="margin: 50px 0 0 900px;">
          상품코드<br>
-         <input type="text" name="productNum">
+         <input type="text" name="productNum" style="border: 2px solid skyblue; border-radius: 5px;">
       </div>
       
-      <div style="margin: 30px 0 0 100px;">
+      <div style="margin: -90px 0 0 100px;">
          상품가격<br>
-         <input type="text" name="productPee">원
+         <input type="text" name="productPee" style="border: 2px solid skyblue; width:200px; border-radius: 5px;">원
       </div>
       
       <div style="margin: 10px 0 0 100px; height: 100px;">
          상품수량<br>
-         <input type="text" name="productQuantity">개
+         <input type="text" name="productQuantity"  style="border: 2px solid skyblue; width:200px; border-radius: 5px;">개
       </div>
 
       
@@ -193,7 +197,7 @@
             <div class="form-inline mb-2">
                <label class="input-group-addon mr-3 insert-label">썸네일</label>
                <div class="boardImg" id="titleImgArea">
-                  <img id="titleImg" width="200" height="200">
+                  <img id="titleImg" width="200" height="200" style="border: 2px solid skyblue; border-radius: 5px;">
                </div>
             </div>
          </div>
@@ -221,7 +225,7 @@
    </form>
 </div>
    </div>
-<div style="margin-bottom: 10px;">
+<div style="margin-top: 100%">
 <jsp:include page="../footer.jsp" />
 </div>
    <!-- Bootstrap core JS-->

@@ -9,26 +9,28 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-	.wrap{width: 1200px;height: 800px; margin: -490px 0 0 200px;}
+	.wrap{width: 1200px;height: 800px; margin: 0px 0 0 200px; }
 	.t{width: 1500px; height: 1000px;  margin: auto;}
 	.inpuptTile{width: 400px; margin-left: 50px;}
 	.array_search{margin: 0 0 0 780px;}
-	
-	
+	aside { float: left; width: 200px; padding: 0 0 0 10px; }
+	aside ul li { margin-bottom: 10px; list-style: none; }
 </style>
 
 </head>
 <body>
 <jsp:include page="../header.jsp" />
+<aside>
+	<jsp:include page="../aside.jsp" />
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
-		
+
 	<div class="wrap">
 		<div>
 			<h1>회원목록</h1>
 		</div>
 		
-		<div class="array_search">
+		<!-- <div class="array_search">
 			<select name="array" class="array">
 				<option value="0">정렬기준
 				<option value="1">가입일
@@ -37,7 +39,15 @@
 			</select>
 			<input type="text" name="search">
 			<button type="button" class="btn btn-outline-primary" id="search" onclick="">검색</button>
-		</div>
+		</div> -->
+		<form action="${ contextPath }/adminMember/adminMemberSearch" method="post" style="margin: 0 0 0 850px;">
+			<select name="MemSearch_option">
+	        	<option value="member_id"<c:if test="${search_option eq 'member_id'}">selected</c:if>>이름</option>
+	        	<option value="enquiry_subject"<c:if test="${search_option eq 'enquiry_subject'}">selected</c:if>>아이디</option>
+	   		</select>
+			   <input type="text" name="keyword" value="${ keyword }">
+			   <input type="submit" id="searchBtn" value="검색">
+		</form>
 		
 	<div class="container">        
 	  <table class="table table-striped">

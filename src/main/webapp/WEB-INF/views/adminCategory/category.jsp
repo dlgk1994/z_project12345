@@ -9,14 +9,14 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-	.sideCategory{width: 200px; height: 500px;}
+	/* .sideCategory{width: 200px; height: 500px;}
 	nav ul {list-style: none; line-height: 30px;}
 	nav ul li a{color: black; text-decoration: none;}
 	nav ul li a:hover {
 		color:blue;padding-bottom: 3px;
 		border-bottom: 1px solid blue; transition:all 0.25s;
 		text-decoration: none;
-	}
+	} */
 	
 </style>
 
@@ -26,9 +26,9 @@
 
 
 <div class ="sideCategory">
-	<h2>관리자</h2>
+	<%-- <h2>관리자</h2>
 	<nav>
-		<label><b>회원관리</b></label>
+		<label><b>상품관리</b></label>
 		<ul>
 			<li><a href="${contextPath }/adminProduct/adminProductList">상품조회</a></li>
 		</ul>
@@ -36,7 +36,7 @@
 		<ul>
 			<li><a href="${contextPath }/adminMember/adminMemberList">회원관리</a></li>
 		</ul>
-		<label><b>회원관리</b></label>
+		<label><b>게시판</b></label>
 		<ul>
 			<li><a href="${contextPath }/board/faq">자주하는 질문</a></li>
 			<li><a href="${contextPath }/board/qna">Q&A</a></li>
@@ -44,7 +44,7 @@
 		</ul>
 	</nav>
 	
-</div>
+</div> --%>
 	
 
 

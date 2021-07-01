@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.root.admin.product.dto.boardQnaRepDTO;
 import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
+import com.care.root.board.dto.EnquiryDTO;
+import com.care.root.board.dto.NoticeDTO;
 
 //상품등록 서비스인터페이스
 public interface productService {
@@ -27,6 +30,24 @@ public interface productService {
 	public int updateProduct(productDTO updateProductDTO, MultipartFile images, String savePath);
 	public void delete(List<String> num);
 	public List<String> selectDBFileList();
+	public void noticeSave(NoticeDTO dto, HttpServletRequest request);
+	public void contentView(int notice_no, Model model);
+	public void addReply(boardQnaRepDTO dto);
+	public String noticeModify(HttpServletRequest request,int notice_no);
+	public String noticeDelete(int notice_no, HttpServletRequest request);
+	public void replyModify(int enquiryReplyNo, String eReplyContent);
+	public void replyState(EnquiryDTO edto,int replyno);
+	public void adminProductSearch(Model model, String productSearch_option, String keyword);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -27,16 +27,18 @@
 </style>
 </head>
 <body>
-	<c:import url="../header.jsp"/>	
+	<c:import url="../header.jsp"/>
+	<aside>
+		<jsp:include page="../aside.jsp" />						
+	</aside>
 	<section id="container">
-		<aside>
-			<c:import url="../aside.jsp"/>				
-		</aside>
+	
 		<div id="container_box">
 		
 		<h3>Q&A</h3>
 		<div>
 		<input type="button" onclick="location.href='${ contextPath }/board/qnaForm'" value="글쓰기">
+<<<<<<< HEAD
 			<table border="1" style="width: 90%;">
 				<tr>
 					<th>글번호</th><th>답변현황</th><th>제목</th><th>글쓴이</th><th>등록일</th>
@@ -57,6 +59,39 @@
 					<td>${ formatRegDate }</td>
 				</tr>
 				</c:forEach>
+=======
+			<table style="width: 90%;" class="table table-striped">
+				<thead>
+					<tr>
+						<th>글번호</th><th>답변현황</th><th>제목</th><th>글쓴이</th><th>등록일</th>
+					</tr>
+					<c:if test="${ qnaList.size() == 0 }">
+						<tr><th colspan="5">질문 내역이 없습니다</th></tr>
+					</c:if>
+				<thead>
+				<tbody>
+					<c:forEach var="dto" items="${ qnaList }">
+					<tr>
+						<td>${ dto.enquiry_no }</td>
+						<td>
+						<c:choose>
+							<c:when test="${ dto.enquiry_state == '1'}">
+								답변완료
+							</c:when>
+							<c:otherwise>
+								답변중
+							</c:otherwise>
+						</c:choose>
+						</td>
+						<td>
+							<a href="${ contextPath }/board/selectQna?enquiry_no=${ dto.enquiry_no }">${ dto.enquiry_subject }</a> 
+						</td>
+						<td>${ dto.member_id }</td>
+						<td>${ dto.enquiry_writedate }</td>
+					</tr>
+					</c:forEach>
+				</tbody> 
+>>>>>>> kim
 			</table>
 		</div>
 		<div>

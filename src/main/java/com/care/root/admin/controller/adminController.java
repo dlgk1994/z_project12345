@@ -2,6 +2,7 @@ package com.care.root.admin.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,7 @@ import com.care.root.admin.product.dto.productDTO;
 import com.care.root.admin.product.dto.productImageDTO;
 import com.care.root.admin.product.service.productFileService;
 import com.care.root.admin.product.service.productService;
+import com.care.root.board.dto.NoticeDTO;
 
 @Controller //관리자 컨트롤러
 public class adminController {
@@ -268,11 +271,14 @@ public class adminController {
 	//공지사항 작성
 	@RequestMapping("boardInput/noticeInput")
 	public String noticeInput() {
+		
 		return "boardInput/noticeInput";
 	}
 	//공지사항 클릭하고 보기
 	@RequestMapping("boardInput/notice")
-	public String notice() {
+	public String notice(@RequestParam int notice_no,Model model) {
+		System.out.println("notice_no 컨트롤러 : " + notice_no);
+		ps.contentView(notice_no, model);
 		return "boardInput/notice";
 	}
 	//QnA 클릭해서 확인
@@ -314,21 +320,85 @@ public class adminController {
 	
 	
 	
+	//공지사항 저장
+	@RequestMapping("noticeSave")
+	public String noticeSave(HttpServletRequest request,
+							HttpServletResponse response){
+		NoticeDTO dto = new NoticeDTO();
+		dto.setNotice_title(request.getParameter("notice_title"));
+		dto.setNotice_content(request.getParameter("notice_content"));
+		dto.setNotice_no(Integer.parseInt(request.getParameter("notice_no"))); // 시퀀스 만들어지면 지우고 maaper에 시퀀스로 등록하기
+		dto.setNotice_group(request.getParameter("notice_group"));
+		
+		
+		ps.noticeSave(dto, request);
+		
+		return "redirect:board/notice";
+		
+	}
+
+	//공지사항 수정
+	@RequestMapping("noticeModify")
+	public String noticeModify(HttpServletResponse response, // 사용자에게 메시지 전달(성공,실패)
+							HttpServletRequest request,
+							@RequestParam int notice_no) throws IOException {
+		String message = ps.noticeModify(request,notice_no);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");
+		out.print(message);
+		
+		
+		return "redirect:board/notice";
+	}
+	//공지사항 삭제
+	@RequestMapping("noticeDelete")
+	public void delete(@RequestParam int notice_no,
+						HttpServletRequest request,
+						HttpServletResponse response) throws IOException {
+		
+		String message = ps.noticeDelete(notice_no, request);
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");
+		out.print(message);
+		
+	}
+
+	//QnA 답변 수정
+	@RequestMapping("replyModify")
+	public String replyModify(HttpServletRequest request,
+							@RequestParam int enquiryReplyNo,
+							@Param(value = "eReplyContent") String eReplyContent) {
+		
+		ps.replyModify(enquiryReplyNo,eReplyContent);
+		return "redirect:board/qna";
+	}
 	
+	//회원검색
+	@RequestMapping("adminMember/adminMemberSearch")
+	public void adminMemberSearch(){
+		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//상품검색
+	@RequestMapping("adminProduct/adminProductSearch")
+	public String adminProductSearch(Model model,@RequestParam(defaultValue="product_num") String ProductSearch_option,@RequestParam(defaultValue="") String keyword){
+		ps.adminProductSearch(model,ProductSearch_option,keyword);
+		model.addAttribute("productSearch_option", ProductSearch_option);
+		model.addAttribute("keyword", keyword);
+		
+		return "adminProduct/adminProductSearch";
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+

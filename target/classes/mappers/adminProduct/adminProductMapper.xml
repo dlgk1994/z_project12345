@@ -24,7 +24,14 @@
 			<result property="fileLevel" column="file_level"/>
 			<result property="parentBoardNo" column="parent_board_no"/>
   </resultMap>		
-		
+	<resultMap type="com.care.root.board.dto.NoticeDTO" id="notice">
+		<id property="notice_no" column="notice_no"/>
+		<result property="notice_group" column="notice_group"/>
+		<result property="notice_content" column="notice_content"/>
+		<result property="notice_writedate" column="notice_writedate"/>
+		<result property="notice_title" column="notice_title"/>
+		<result property="notice_hit" column="notice_hit"/>
+	</resultMap>		
 	
 	
 	
@@ -35,8 +42,8 @@
 		
 	</select>
 	<insert id="insertProduct" parameterType="map">
-		insert into product(product_num,product_name,product_title,product_category,product_content,product_company,product_quantity,product_pee)
-		values(#{productNum},#{productName},#{productTitle},#{productCategory},#{productContent},#{productCompany},#{productQuantity},#{productPee})
+		insert into product(product_num,product_name,product_title,product_content,product_quantity,product_pee)
+			values(#{productNum},#{productName},#{productTitle},#{productContent},#{productQuantity},#{productPee})
 	</insert>
 	
 	<select id="adminProductView" resultMap="product">
@@ -153,6 +160,31 @@
  	 ]]>
    </select>
 
+	<insert id="noticeWriteSave">
+		insert into board_notice(notice_title,notice_content,notice_no,notice_group)
+		values(#{notice_title},#{notice_content},#{notice_no},#{notice_group})
+	</insert>
+	
+	
+	<select id="contentView" resultMap="notice">
+		select * from board_notice where notice_no=#{notice_no}
+	</select>
+	
+	<update id="noticeModify">
+		update board_notice set notice_title=#{notice_title}, 
+		notice_content=#{notice_content}, 
+		notice_group=#{notice_group} 
+		where notice_no=#{notice_no}
+	</update>
+	<delete id="noticeDelete">
+		delete from board_notice where notice_no=#{notice_no}
+	</delete>
+	
+	<select id="adminProductSearch" parameterType="java.util.HashMap" resultMap="product">
+		select * from product where ${productSearch_option} like '%'||#{keyword}||'%'
+   </select>
+	
+        
 	
 </mapper>
 

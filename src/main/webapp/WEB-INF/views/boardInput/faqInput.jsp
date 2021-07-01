@@ -23,8 +23,11 @@
 </head>
 <body>
 <jsp:include page="../header.jsp" />
+<aside>
+	<jsp:include page="../adminCategory/category.jsp" />						
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
+
 	<div class="wrap">
 		<h2>자주 하는 질문</h2>
 		

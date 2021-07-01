@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+<<<<<<< HEAD
 import com.care.root.board.dto.FaqDTO;
+=======
+import com.care.root.admin.product.dto.boardQnaRepDTO;
+>>>>>>> kim
 import com.care.root.board.service.BoardServiceImpl;
 
 @Controller
 @RequestMapping("board")
 public class BoardController {
+	private static final String HttpServletRequest = null;
 	@Autowired BoardServiceImpl bs;
 	
 	static int cnt = 0;
@@ -61,6 +68,7 @@ public class BoardController {
 	@RequestMapping("qna")
 	public String qna(Model model, @RequestParam(value="num", required=false, defaultValue="1") int num) {
 		bs.qna(model, num);
+		
 		return "board/qna";
 	}
 	//Q&A 글작성
@@ -78,6 +86,14 @@ public class BoardController {
 	@RequestMapping("selectQna")
 	public String selectQna(Model model, @RequestParam int enquiry_no) {
 		bs.selectQna(model, enquiry_no);
+<<<<<<< HEAD
+=======
+		ra.addFlashAttribute("model", model);
+		
+		bs.getRepList(enquiry_no, model);
+		
+		
+>>>>>>> kim
 		return "board/selectQna";
 	}
 	//Q&A 검색

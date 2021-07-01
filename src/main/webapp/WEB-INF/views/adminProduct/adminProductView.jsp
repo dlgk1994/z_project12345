@@ -21,35 +21,37 @@
     
     
 <style type="text/css">
-	.wrap{width: 1200px;height: 800px; margin: -490px 0 0 140px;}
-	.t{width: 1500px; height: 1000px;  margin: auto;}
+	.wrap{width: 1200px;height: 800px; margin: 0px 0 0 140px;}
+	.t{width: 1500px;  margin: auto;}
 	.subTitle{margin-left: 450px; font-size: 40px;}
 	.iTitle{margin: 20px 0 0 100px; height: 20px; }
 	/* .#ProName{margin: 100px 0 0 500px} */
 
 	.inpuptTile{width: 400px;}
-	.t{width: 1500px; height: 1000px;  margin: auto; }
-	.category1{margin: 20px 0 0 100px; border: 1px solid black;}
-	.category2{margin: 40px 0 0 100px; border: 1px solid black;}
+	.t{width: 1500px;   margin: auto; }
+	.category1{margin: 20px 0 0 48px; border: 1px solid black;}
+	.category2{margin: 40px 0 0 48px; border: 1px solid black;}
 	
-	.thumbnail{width:150px; height:200px; margin: -300px 0 0 900px; }
+	.thumbnail{width:150px; height:200px; margin: -400px 0 0 900px;}
 	
 	
-	.summernote1{width: 1000px;  margin: 60px 0 0 100px; }
+	.summernote1{width: 1000px;   margin: 180px 0 0 100px;}
 	
 	.file{margin: 0 0 0 100px;}
 	
 	.button{margin: 10px 0 0 900px;height: 900px;}
 	#ok{font-size: 16px;}
 	#cancel{font-size: 16px;}
+	aside ul li { margin-bottom: 10px; list-style: none; }
+ 	aside { float: left; width: 200px; padding: 0 0 0 10px; }
 </style>
 <!-- summernote 사용 시 필요한 js 파일 추가 -->
 <script src="${contextPath}/resources/summernote/js/mySummernote.js"></script>
 <script type="text/javascript">
 	//summernoet
-	$(document).ready(function() { /* 이거 없으면 summernote 없어짐 */
-	  $('#summernote').summernote();
-	});
+	//$(document).ready(function() { /* 이거 없으면 summernote 없어짐 */
+	  //$('#summernote').summernote();
+	//});
 	
 	
 	// 취소버튼
@@ -136,53 +138,56 @@
 </head>
 <body>
 <jsp:include page="../header.jsp" />
+<aside>
+	<jsp:include page="../aside.jsp" />						
+</aside>
 <div class="t">
-<jsp:include page="../adminCategory/category.jsp" />
+
 	
 <div class="wrap">
 	<h1 class="subTitle" >상품</h1>
 	<form action="${contextPath }/adminProduct/adminProductModify" method="post" enctype="multipart/form-data">
 		<div class="iTitle">
 			글제목<br>
-			<input type="text" name=productTitle class="inpuptTile"  value="${productView.productTitle }">
+			<input type="text" name=productTitle class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;"  value="${productView.productTitle }">
 		</div>
 		
 		<div id="ProName" style="margin: 50px 0 0 100px;">
 			상품명<br>
-			<input type="text" name="productName" class="inpuptTile"  value="${productView.productName }">
+			<input type="text" name="productName" class="inpuptTile" style="border: 2px solid skyblue; border-radius: 5px;"  value="${productView.productName }">
 		</div>
 		
-		<div>
-			<select name="productCategory" class="category1" value="${productView.productCategory }">
+		<%-- <div>
+			<select name="productCategory" class="category1" style="border: 2px solid skyblue; border-radius: 5px;" >
 				<option value="0">카테고리
-				<option value="휴대폰">휴대폰
-				<option value="스마트워치">스마트 워치
-				<option value="블루투스 이어폰">블루투스 이어폰
-				<option value="태블릿PC">태블릿PC
+				<option value="휴대폰" <c:if test="${productView.productCategory=='휴대폰'}"> selected </c:if>>휴대폰
+				<option value="스마트워치" <c:if test="${productView.productCategory=='스마트워치'}"> selected </c:if>>스마트 워치
+				<option value="블루투스 이어폰" <c:if test="${productView.productCategory=='블루투스 이어폰'}"> selected </c:if>>블루투스 이어폰
+				<option value="태블릿PC" <c:if test="${productView.productCategory=='태블릿PC'}"> selected </c:if>>태블릿PC
 			</select>
 		</div>
 		
 		<div>
-			<select name="productCompany" class="category2" value="${productView.productCompany }">
+			<select name="productCompany" style="border: 2px solid skyblue; border-radius: 5px;" class="category2">
 				<option value="0">제조사
-				<option value="삼성">삼성
-				<option value="LG">LG
+				<option value="삼성" <c:if test="${productView.productCompany=='삼성'}"> selected </c:if>>삼성
+				<option value="LG" <c:if test="${productView.productCompany=='LG'}"> selected </c:if>>LG
 			</select>
-		</div>
+		</div> --%>
 		
-		<div style="margin: 10px 0 0 100px;">
+		<div style="margin: 50px 0 0 900px;">
 			상품코드<br>
-			<input type="text" name="productNum" value="${productView.productNum}" readonly="readonly">
+			<input type="text" name="productNum" style="border: 2px solid skyblue; border-radius: 5px;" value="${productView.productNum}" readonly="readonly">
 		</div>
 		
-		<div style="margin: 30px 0 0 100px;">
+		<div style="margin: -90px 0 0 100px;">
 			상품가격<br>
-			<input type="text" name="productPee"  value="${productView.productPee }">원
+			<input type="text" name="productPee" style="border: 2px solid skyblue; width:200px; border-radius: 5px;"  value="${productView.productPee }">원
 		</div>
 		
 		<div style="margin: 10px 0 0 100px; height: 100px;">
 			상품수량<br>
-			<input type="text" name="productQuantity"  value="${productView.productQuantity }">개
+			<input type="text" name="productQuantity" style="border: 2px solid skyblue; width:200px; border-radius: 5px;"  value="${productView.productQuantity }">개
 		</div>
 		<%-- <div class="thumbnail" >
 			<img alt="선택된 이미지 없음" src="${contextPath}/adminProduct/download?productThumbnail=${productView.productThumbnail}" id="preview" style="width:150px; height:200px;">
@@ -219,10 +224,10 @@
 		</div>
 		
 	</form>
-</div>
+</div>	
 	</div>
-<div>
-<jsp:include page="../footer.jsp" />
+<div style="margin-top: 100%">
+<c:import url="../footer.jsp"/>
 </div>
 	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
