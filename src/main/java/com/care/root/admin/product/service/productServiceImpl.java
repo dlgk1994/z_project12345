@@ -690,8 +690,7 @@ public class productServiceImpl implements productService{
 			dto.setFaq_content(request.getParameter("faq_content"));
 			
 			productFileService pfs = new productFileServiceImpl();
-			System.out.println("getFaq_no : "+dto.getFaq_no());
-			System.out.println("faq_no : " + faq_no);
+			
 			int result = mapper.faqModify(dto);
 			MessageDTO mDTO = new MessageDTO();
 			mDTO.setResult(result);

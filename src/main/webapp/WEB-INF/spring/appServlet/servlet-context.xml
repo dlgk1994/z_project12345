@@ -39,6 +39,23 @@
 	   <beans:property name="maxUploadSize" value="52428800"/>
 	</beans:bean>
 	
+	<beans:bean id="interceptor02"
+	class="com.care.root.common.Interceptor.Interceptor2"/>
+<beans:bean id="interceptor01"
+	class="com.care.root.common.Interceptor.Interceptor1"/>
+<interceptors>
+	<interceptor>
+		<mapping path="/member/id_modify"/>
+		<beans:ref bean="interceptor01"/>
+	</interceptor>	
 	
+	<interceptor>
+		<mapping path="/member/login"/>
+		<mapping path="/member/join"/>
+		<mapping path="/member/id_find"/>
+		<mapping path="/member/pw_find"/>
+		<beans:ref bean="interceptor02"/>
+	</interceptor>	
+</interceptors>
 	
 </beans:beans>

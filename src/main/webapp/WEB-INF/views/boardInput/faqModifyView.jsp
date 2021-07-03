@@ -25,15 +25,17 @@
 
 <section id="container">
 	<div id="container_box">
-		<form action="${contextPath}/faqSave" >
-		
+		<form action="${contextPath}/faqModify" >
+			<input type="hidden" name="faq_no" value="${faqModifyView.faq_no}">
 			<table>
 				<tr>
 					<td>
 						공지분류
 					</td>
 					<td>
-						<select name="faq_group" class="faqGroup " style="border: 2px solid skyblue; border-radius: 5px;">
+						<select name="faq_group" class="faqGroup " style="border: 2px solid skyblue; border-radius: 5px;" id="fruit" readonly 
+							        onFocus="this.initialSelect = this.selectedIndex;" 
+							        onChange="this.selectedIndex = this.initialSelect;">
 				            <option value="0" <c:if test="${faqModifyView.faq_group =='0'}"> selected </c:if>>회원/정보관리
 				            <option value="1" <c:if test="${faqModifyView.faq_group =='1'}"> selected </c:if>>주문/결제
 				            <option value="2" <c:if test="${faqModifyView.faq_group =='2'}"> selected </c:if>>배송

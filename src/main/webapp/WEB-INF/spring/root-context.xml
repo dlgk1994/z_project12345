@@ -30,4 +30,11 @@
 	<mybatis-spring:scan base-package="com.care.root.mypage.mybatis"/>
 	<mybatis-spring:scan base-package="com.care.root.adminProduct.mtbatis"/>
 	<mybatis-spring:scan base-package="com.care.root.board.mybatis"/>
+	<mybatis-spring:scan base-package="com.care.root.join.mybatis"/>
+   <mybatis-spring:scan base-package="com.care.root.login.mybatis"/>
+   <mybatis-spring:scan base-package="com.care.root.modify.mybatis"/>
+   <mybatis-spring:scan base-package="com.care.root.find.mybatis"/>
+   <mybatis-spring:scan base-package="com.care.root.mypage.mybatis"/>
+   <mybatis-spring:scan base-package="com.care.root.adminProduct.mtbatis"/>
+   <mybatis-spring:scan base-package="com.care.root.board.mybatis"/>
 </beans>

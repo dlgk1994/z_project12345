@@ -97,7 +97,7 @@
 									<a href="#" title="View Detail" id="faq_subject" class="faq_subject">${ dto.faq_subject }</a>
 									<div id="faq_content" class="faq_content">
 										${ dto.faq_content }
-										<c:if test="${login == admin }">
+										<c:if test="${true}"><br><br>
 											<input type="button" value="수정" onclick="location.href='${contextPath}/boardInput/faqModifyView?faq_no=${dto.faq_no}'">
 											<input type="button" value="삭제" onclick="location.href='${contextPath}/faqDelete?faq_no=${dto.faq_no}'">
 										</c:if>
@@ -141,8 +141,11 @@
 									let html = ""
 									$.each(list, function(index, item) {
 										html += "<li><a href='#' title='View Detail'>" + item.faq_subject + "</a>"
-										html += "<div>" + item.faq_content + "</div></li>"
-										
+										html += "<div>" + item.faq_content
+										html += "<c:if test="${true}">" + "<br><br>" //관리자 세션이면 버튼 생기고 유저 세션이면 버튼 안보임
+										html += "<button onclick=" + "\"location.href='${contextPath}/boardInput/faqModifyView?faq_no=" + item.faq_no + "'\"" + ">" + "수정" + "</button>"
+										html += "<button onclick=" + "\"location.href='${contextPath}/faqDelete?faq_no=" + item.faq_no + "'\"" + ">" + "삭제" + "</button>" 
+										html += "</c:if>" + "</div></li>"
 										$(".fold_list").html(html);
 										
 										$(".fold_list>li>a").click(function() {

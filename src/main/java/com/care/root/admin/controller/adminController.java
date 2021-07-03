@@ -419,9 +419,10 @@ public class adminController {
 		return "boardInput/faqModifyView";
 	}
 	
-	@RequestMapping("boardInput/faqModify")
+	@RequestMapping("faqModify")
 	public void faqModify(HttpServletRequest request,HttpServletResponse response,@RequestParam int faq_no) throws IOException {
 		String message = ps.faqModify(request, faq_no);
+		
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html; chartset=utf-8");
 		

@@ -25,7 +25,7 @@
 			<table>
 				<tr>
 					<td>
-						공지분류
+						공지분류 ${faq_no}
 					</td>
 					<td>
 						<select name="faq_group" class="faqGroup " style="border: 2px solid skyblue; border-radius: 5px;">

@@ -46,8 +46,13 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#!">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">join</a></li>
+					<c:if test="${login == null }">
+						<li class="nav-item"><a class="nav-link" href="${contextPath }/member/login">login</a></li>
+					</c:if>
+					<c:if test="${login != null }">
+					<li class="nav-item"><a class="nav-link" href="${contextPath }/member/logout">logout</a></li>					
+					</c:if>
+					<li class="nav-item"><a class="nav-link" href="${contextPath }/member/join">join</a></li>
 					<li class="nav-item"><a class="nav-link" href="${ contextPath }/mypage/myCart">myPage</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
