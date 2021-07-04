@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.care.root.product.mybatis.productMapper">
+	<resultMap type="com.care.root.admin.product.dto.productDTO" id="product">
+		<id property="productNum" column="product_num"/>
+		<result property="productName" column="product_name"/>
+		<result property="productTitle" column="product_title"/>
+		<result property="productCategory" column="product_category"/>
+		<result property="productContent" column="product_content"/>		
+		<result property="productDate" column="product_data"/>
+		<result property="productCompany" column="product_company"/>		
+		<result property="productQuantity" column="product_quantity"/>
+		<result property="productPee" column="product_pee"/>
+	</resultMap>
+	
+	<select id="ProductList" resultMap="product">
+		<!-- select * from product order by product_data desc -->
+		select B.* from(select rownum rn, A.* from
+		(select * from product order by product_data desc)A)B where rn between #{s} and #{e}
+		
+	</select>
+	
+	
+	<select id="ProductView" resultMap="product">
+		select * from product where product_num=#{productNum}
+	</select>
+	
+	
+	
+	<select id="ProductSearch" parameterType="java.util.HashMap" resultMap="product">
+		select * from product where ${productSearch_option} like '%'||#{keyword}||'%'
+   </select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
