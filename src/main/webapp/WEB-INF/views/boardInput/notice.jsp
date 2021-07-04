@@ -22,7 +22,7 @@
 	 }
 	}
 	function back() {
-		window.history.back();
+		location.href='${contextPath}/board/notice'
 	}
 </script>
 </head>
@@ -38,7 +38,7 @@
 		<form action="${contextPath}/noticeModify?notice_no=${noticeData.notice_no}">
 		<input type="hidden" name="notice_no" value="${noticeData.notice_no}">
 		<c:choose>
-			<c:when test=""><!-- ${login == admin }  관리자가 로그인시 -->
+			<c:when test="${login == admin }"><!-- ${login == admin }  관리자가 로그인시 -->
 			<table style="border-collapse: separate; border-spacing: 0 15px;">
 				<tr>
 					<th><h2>공지사항</h2></th>
@@ -54,7 +54,11 @@
 						</select>
 					</td>
 				</tr>
-				
+				<tr>
+					<td></td>
+					<td colspan="2" style="text-align: right;">${noticeData.notice_writedate} &nbsp ${noticeData.notice_hit }</td>
+					<td></td>
+				</tr>
 				<tr>
 					<th>공지제목</th>
 					<td>
