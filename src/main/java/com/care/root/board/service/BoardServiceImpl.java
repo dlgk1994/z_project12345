@@ -58,6 +58,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void selectNotice(Model model, int notice_no) {
 		upHitNotice(notice_no);
+		System.out.println("selectNotice 서비스 글번호 : "+notice_no);
 		model.addAttribute("selectNotice",mapper.selectNotice(notice_no));
 	}
 	//공지사항 클릭 시 조회수 증가

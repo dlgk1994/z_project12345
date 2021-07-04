@@ -98,8 +98,8 @@
 									<div id="faq_content" class="faq_content">
 										${ dto.faq_content }
 										<c:if test="${true}"><br><br>
-											<input type="button" value="수정" onclick="location.href='${contextPath}/boardInput/faqModifyView?faq_no=${dto.faq_no}'">
-											<input type="button" value="삭제" onclick="location.href='${contextPath}/faqDelete?faq_no=${dto.faq_no}'">
+											<input type="button" value="수정" class="btn btn-secondary insert-place" onclick="location.href='${contextPath}/boardInput/faqModifyView?faq_no=${dto.faq_no}'">
+											<input type="button" value="삭제" class="btn btn-secondary insert-place" onclick="location.href='${contextPath}/faqDelete?faq_no=${dto.faq_no}'">
 										</c:if>
 									</div>
 								</li>
@@ -143,8 +143,8 @@
 										html += "<li><a href='#' title='View Detail'>" + item.faq_subject + "</a>"
 										html += "<div>" + item.faq_content
 										html += "<c:if test="${true}">" + "<br><br>" //관리자 세션이면 버튼 생기고 유저 세션이면 버튼 안보임
-										html += "<button onclick=" + "\"location.href='${contextPath}/boardInput/faqModifyView?faq_no=" + item.faq_no + "'\"" + ">" + "수정" + "</button>"
-										html += "<button onclick=" + "\"location.href='${contextPath}/faqDelete?faq_no=" + item.faq_no + "'\"" + ">" + "삭제" + "</button>" 
+										html += "<button onclick=" + "\"location.href='${contextPath}/boardInput/faqModifyView?faq_no=" + item.faq_no + "'\"" + "class=\"btn btn-secondary insert-place\"" +">" + "수정" + "</button>"
+										html += "<button onclick=" + "\"location.href='${contextPath}/faqDelete?faq_no=" + item.faq_no + "'\""+ "class=\"btn btn-secondary insert-place\"" + ">" + "삭제" + "</button>" 
 										html += "</c:if>" + "</div></li>"
 										$(".fold_list").html(html);
 										

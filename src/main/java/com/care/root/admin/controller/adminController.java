@@ -37,12 +37,15 @@ import com.care.root.admin.product.service.productFileService;
 import com.care.root.admin.product.service.productService;
 import com.care.root.board.dto.FaqDTO;
 import com.care.root.board.dto.NoticeDTO;
+import com.care.root.board.service.BoardService;
+import com.care.root.board.service.BoardServiceImpl;
 
 @Controller //관리자 컨트롤러
 public class adminController {
 	@Autowired 
 	productService ps;
-	
+	@Autowired
+	BoardServiceImpl bs;
 	//관리자 상품 리스트
 	@GetMapping("adminProduct/adminProductList")
 	public String adminProductList(Model model,
@@ -280,8 +283,11 @@ public class adminController {
 	public String notice(@RequestParam int notice_no,Model model) {
 		System.out.println("notice_no 컨트롤러 : " + notice_no);
 		ps.contentView(notice_no, model);
+		
+		bs.upHitNotice(notice_no);
 		return "boardInput/notice";
 	}
+	
 	//QnA 클릭해서 확인
 	@RequestMapping("boardInput/QNA")
 	public String QNA() {

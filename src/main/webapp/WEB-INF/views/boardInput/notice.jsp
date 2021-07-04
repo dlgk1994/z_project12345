@@ -38,7 +38,7 @@
 		<form action="${contextPath}/noticeModify?notice_no=${noticeData.notice_no}">
 		<input type="hidden" name="notice_no" value="${noticeData.notice_no}">
 		<c:choose>
-			<c:when test="${login == admin }"><!-- ${login == admin }  관리자가 로그인시 -->
+			<c:when test=""><!-- ${login == admin }  관리자가 로그인시 -->
 			<table style="border-collapse: separate; border-spacing: 0 15px;">
 				<tr>
 					<th><h2>공지사항</h2></th>
@@ -84,13 +84,13 @@
 				
 				<tr>
 					<th>공지분류</th>
-					<td><label>${noticeData.notice_group }</label></td>
+					<td><label>${noticeData.notice_group } &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${noticeData.notice_writedate}</label></td>
 				</tr>
 				
 				<tr>
 					<th>공지제목</th>
 					<td>
-						<label>${noticeData.notice_title }</label>
+						<label>${noticeData.notice_title }&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp${noticeData.notice_hit } </label>
 					</td>
 				</tr>
 				
